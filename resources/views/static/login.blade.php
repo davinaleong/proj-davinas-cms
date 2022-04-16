@@ -14,6 +14,8 @@
                                     <span>Please sign in to your account below.</span>
                                 </h4>
                             </div>
+                            @include('components.alert-message')
+                            @include('components.alert-error')
                             <form class="">
                                 <div class="">
                                     <div class="col-md-12">
@@ -29,6 +31,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @include('components.errors')
                                 <div class="position-relative form-check mb-3">
                                     <input name="check" id="exampleCheck" type="checkbox" class="form-check-input">
                                     <label for="exampleCheck" class="form-label form-check-label">Keep me logged

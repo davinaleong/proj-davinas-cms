@@ -47,6 +47,8 @@
                             @yield('page-actions')
                         </div>
                     </div>
+                    @include('components.alert-message')
+                    @include('components.alert-error')
                     @yield('content')
                 </div>
                 @include('components.footer')
