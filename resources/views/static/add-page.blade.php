@@ -38,3 +38,12 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector("#input-text"))
+            .catch(error => console.error("CKEditor Error: ", error))
+    </script>
+@endsection

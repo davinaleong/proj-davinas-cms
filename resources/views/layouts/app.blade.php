@@ -20,6 +20,7 @@
         href="{{ asset('vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css') }}">
     <link href="{{ asset('styles/css/base.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+    @yield('styles')
 </head>
 
 <body>
@@ -88,6 +89,7 @@
     <script type="text/javascript" src="{{ asset('js/tables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/carousel-slider.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>
