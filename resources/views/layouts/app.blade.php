@@ -43,8 +43,8 @@
                                 <div>
                                     @yield('page-title')
                                 </div>
-                                @yield('page-actions')
                             </div>
+                            @yield('page-actions')
                         </div>
                     </div>
                     @yield('content')

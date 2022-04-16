@@ -1,25 +1,46 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page">Activity</li>
+    <li class="breadcrumb-item active" aria-current="page">Pages</li>
 @endsection
 
-@section('page-title', 'Activity')
+@section('page-title', 'Pages')
+
+@section('page-actions')
+    <div class="page-title-actions">
+        <a href="add-page.html" class="btn btn-info btn-shadow">
+            <i class="fa fa-plus"></i> Add
+        </a>
+    </div>
+@endsection
 
 @section('content')
     <div class="main-card mb-3 card">
         <div class="card-body">
+            <h5 class="card-title">List Pages</h5>
             <table class="mb-3 table">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
-                        <th>Timestamp</th>
+                        <th>Title</th>
+                        <th>Date Created</th>
+                        <th>Date Updated</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <th scope="row">1</th>
                         <td>Lorem Ipsum</td>
+                        <td>Lorem Ipsum Title</td>
                         <td>2022-04-15</td>
+                        <td>2022-04-15</td>
+                        <td>
+                            <a href="add-page.html" class="btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
