@@ -16,18 +16,18 @@
                             </div>
                             @include('components.alert-message')
                             @include('components.alert-error')
-                            <form class="">
+                            <form method="POST" action="{{ route('login') }}" class="">
                                 <div class="">
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
-                                            <input name="email" id="exampleEmail" placeholder="Email here..." type="email"
-                                                class="form-control">
+                                            <input name="email" id="input-email" placeholder="Email" type="email"
+                                                class="form-control" value="{{ old('email') }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="position-relative mb-3">
-                                            <input name="password" id="examplePassword" placeholder="Password here..."
-                                                type="password" class="form-control">
+                                            <input name="password" id="input-password" placeholder="Password"
+                                                type="password" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -38,23 +38,16 @@
                                         in</label>
                                 </div>
                             </form>
-                            <div class="divider"></div>
-                            <h6 class="mb-0">No account?
-                                <a href="javascript:void(0);" class="text-primary">Sign up now</a>
-                            </h6>
                         </div>
                         <div class="modal-footer clearfix">
-                            <div class="float-start">
-                                <a href="javascript:void(0);" class="btn-lg btn btn-link">Recover Password</a>
-                            </div>
-                            <div class="float-end">
-                                <!-- <button class="btn btn-primary btn-lg">Login to Dashboard</button> -->
-                                <a href="index.html" class="btn btn-primary btn-lg">Login to Dashboard</a>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Login to Dashboard</button>
                         </div>
                     </div>
                 </div>
-                <div class="text-center text-white opacity-8 mt-3">Copyright © ArchitectUI 2019</div>
+                <div class="text-center text-white opacity-8 mt-3">
+                    <em>Davina's CMS &copy; Davina Leong,
+                        {{ now()->format('Y') > 2022 ? '2022 - ' . now()->format('Y') : now()->format('Y') }}</em>
+                </div>
             </div>
         </div>
     </div>
