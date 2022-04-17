@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('cms')->middleware(['auth'])->group(function () {
-    Route::get('/activity', function () {
-        return view('static.index');
-    })->name('activity');
+    Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
 });
 
 require __DIR__ . '/auth.php';

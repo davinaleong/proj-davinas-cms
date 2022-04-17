@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->create([
-            'name' => env('ROOT_NAME', 'John Doe'),
-            'email' => env('ROOT_EMAIL', 'johndoe@example.com'),
-            'password' => Hash::make(env('ROOT_PASSWORD', 'helloWorld'))
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => env('ROOT_NAME', 'John Doe'),
+        //     'email' => env('ROOT_EMAIL', 'johndoe@example.com'),
+        //     'password' => Hash::make(env('ROOT_PASSWORD', 'helloWorld'))
+        // ]);
+        \App\Models\Activity::factory(60)->create();
     }
 }
