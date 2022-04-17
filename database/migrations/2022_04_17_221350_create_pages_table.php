@@ -22,6 +22,7 @@ class CreatePagesTable extends Migration
             $table->string('meta_title', 255);
             $table->text('meta_description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
