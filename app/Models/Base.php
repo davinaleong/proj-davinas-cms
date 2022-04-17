@@ -28,10 +28,10 @@ class Base extends Model
 
     public function getCreatedAt()
     {
-        $dbDatetimeFormat = "Y-m-d H:i:s";
+        $dbDatetimeFormat = Setting::getDbDtFormat();
 
         if (filled($this->created_at)) {
-            $datetimeFormat = "d M Y H:i:s";
+            $datetimeFormat = Setting::getSystemDtFormat();
 
             $dt = Carbon::createFromFormat($dbDatetimeFormat, $this->created_at);
             return $dt->format($datetimeFormat);
@@ -42,10 +42,10 @@ class Base extends Model
 
     public function getUpdatedAt()
     {
-        $dbDatetimeFormat = "Y-m-d H:i:s";
+        $dbDatetimeFormat = Setting::getDbDtFormat();
 
         if (filled($this->updated_at)) {
-            $datetimeFormat = "d M Y H:i:s";
+            $datetimeFormat = Setting::getSystemDtFormat();
 
             $dt = Carbon::createFromFormat($dbDatetimeFormat, $this->updated_at);
             return $dt->format($datetimeFormat);
