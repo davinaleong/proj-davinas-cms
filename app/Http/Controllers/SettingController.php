@@ -11,14 +11,15 @@ class SettingController extends Controller
     public function index()
     {
         return view('setting.index', [
-            'settings' => Setting::paginate(Setting::getListPerPage())
+            'settings' => Setting::paginate(Setting::getListPerPage()),
         ]);
     }
 
     public function edit()
     {
         return view('setting.edit', [
-            'settings' => Setting::all()
+            'settings' => Setting::all(),
+            'settings_count' => Setting::count()
         ]);
     }
 }
