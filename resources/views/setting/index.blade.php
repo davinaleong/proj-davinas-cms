@@ -10,6 +10,14 @@
 
 @section('page-title', 'Settings')
 
+@section('page-actions')
+    <div class="page-title-actions">
+        <a href="{{ route('settings.edit') }}" class="btn btn-info btn-shadow">
+            <i class="fa fa-pen"></i> Edit
+        </a>
+    </div>
+@endsection
+
 @section('content')
     <div class="main-card mb-3 card">
         <div class="card-body">
