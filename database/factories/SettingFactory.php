@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ActivityFactory extends Factory
+class SettingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,9 +15,9 @@ class ActivityFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'message' => $this->faker->sentence(10),
-            'label' => '',
-            'link' => ''
+            'name' => $this->faker->name(),
+            'key' => $this->faker->word(),
+            'value' => $this->faker->sentence('5', true)
         ];
     }
 }
