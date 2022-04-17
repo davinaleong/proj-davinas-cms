@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-/** @group new */
 class PageTest extends TestCase
 {
     use RefreshDatabase;

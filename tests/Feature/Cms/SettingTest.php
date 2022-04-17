@@ -47,7 +47,7 @@ class SettingTest extends TestCase
 
     public function test_guest_cannot_store_settings()
     {
-        $this->get('cms/settings')
+        $this->post('cms/settings')
             ->assertStatus(302)
             ->assertRedirect('/login');
     }
