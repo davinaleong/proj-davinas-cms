@@ -17,7 +17,7 @@ class SettingFactory extends Factory
             'user_id' => \App\Models\User::factory(),
             'name' => $this->faker->name(),
             'key' => $this->faker->word(),
-            'value' => $this->faker->sentence('5', true)
+            'value' => $this->faker->sentence(5, true)
         ];
     }
 }
