@@ -14,4 +14,11 @@ class SettingController extends Controller
             'settings' => Setting::paginate(Setting::getListPerPage())
         ]);
     }
+
+    public function edit()
+    {
+        return view('setting.edit', [
+            'settings' => Setting::all()
+        ]);
+    }
 }

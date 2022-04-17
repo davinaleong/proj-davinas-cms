@@ -21,6 +21,7 @@
 @section('content')
     <div class="main-card mb-3 card">
         <div class="card-body">
+            <h5 class="card-title">List Settings</h5>
             <table class="mb-3 table">
                 <thead>
                     <tr>
@@ -45,8 +46,6 @@
                     @endforeach
                 </tbody>
             </table>
-
-            {{ $settings->links() }}
         </div>
     </div>
 @endsection
