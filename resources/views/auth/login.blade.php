@@ -44,7 +44,7 @@
                     </form>
                 </div>
                 <div class="text-center text-white opacity-8 mt-3">
-                    <em>Davina's CMS &copy; Davina Leong,
+                    <em>{{ env('APP_NAME', 'Davina\'s CMS') }} &copy; {{ env('APP_AUTHOR', 'Davina\'s CMS') }},
                         {{ now()->format('Y') > 2022 ? '2022 - ' . now()->format('Y') : now()->format('Y') }}</em>
                 </div>
             </div>

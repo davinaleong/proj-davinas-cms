@@ -2,7 +2,7 @@
     <div class="app-footer">
         <div class="app-footer__inner justify-content-center">
             <div>
-                <em>Davina's CMS &copy; Davina Leong,
+                <em>{{ env('APP_NAME', 'Davina\'s CMS') }} &copy; {{ env('APP_AUTHOR', 'Davina\'s CMS') }},
                     {{ now()->format('Y') > 2022 ? '2022 - ' . now()->format('Y') : now()->format('Y') }}</em>
             </div>
         </div>
