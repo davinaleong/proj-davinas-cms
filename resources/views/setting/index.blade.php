@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{ $setting->getUserName() }}</td>
                             <td>{{ $setting->name }}</td>
-                            <td>{{ $setting->key }}</td>
+                            <td><code>{{ $setting->key }}</code></td>
                             <td>{{ $setting->value }}</td>
                             <td>{{ $setting->getCreatedAt() }}</td>
                             <td>{{ $setting->getUpdatedAt() }}</td>
