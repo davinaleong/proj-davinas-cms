@@ -15,7 +15,7 @@
     <div class="main-card mb-3 card">
         <div class="card-body">
             <h5 class="card-title">Modify Settings</h5>
-            <form action="POST" action="{{ route('settings.store') }}">
+            <form method="POST" action="{{ route('settings.store') }}">
                 @csrf
                 <table id="settingsTable" class="mb-3 table">
                     <thead>
@@ -29,35 +29,41 @@
                     <tbody>
                         @foreach ($settings as $setting)
                             <tr>
-                                <td>{{ $setting->name }}</td>
-                                <td>{{ $setting->key }}</td>
-                                <td>{{ $setting->value }}</td>
+                                <td>
+                                    <input type="text" name="names[]" class="form-control" placeholder="Name"
+                                        value="{{ $setting->name }}" required>
+                                </td>
+                                <td>
+                                    <input type="text" name="keys[]" class="form-control" placeholder="Key"
+                                        value="{{ $setting->key }}" required>
+                                </td>
+                                <td>
+                                    <input type="text" name="values[]" class="form-control" placeholder="Value"
+                                        value="{{ $setting->value }}" required>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="this.parentNode.parentNode.remove();">
+                                        Remove
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
-                        {{-- <tr>
-                            <td>
-                                <input type="text" name="names[]" class="form-control" placeholder="Name" required>
-                            </td>
-                            <td>
-                                <input type="text" name="keys[]" class="form-control" placeholder="Key" required>
-                            </td>
-                            <td>
-                                <input type="text" name="values[]" class="form-control" placeholder="Value" required>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger" onclick="deleteRow()">
-                                    Remove
-                                </button>
-                            </td>
-                        </tr> --}}
                     </tbody>
                     <tfoot>
-                        <td colspan="3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </td>
-                        <td>
-                            <button id="addButton" type="button" class="btn btn-info">Add</button>
-                        </td>
+                        <tr>
+                            <td colspan="4">
+                                @include('components.errors')
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </td>
+                            <td>
+                                <button id="addButton" type="button" class="btn btn-info">Add</button>
+                            </td>
+                        </tr>
                     </tfoot>
                 </table>
             </form>

@@ -25,7 +25,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::prefix('settings')->controller(SettingController::class)->group(function () {
         Route::get('/', 'index')->name('settings.index');
         Route::get('/edit', 'edit')->name('settings.edit');
-        Route::patch('/', 'store')->name('settings.store');
+        Route::post('/', 'store')->name('settings.store');
     });
 });
 
