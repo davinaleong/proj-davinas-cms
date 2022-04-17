@@ -34,7 +34,7 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Dashboards</li>
                 <li class="mm-active">
-                    <a href="index.html" class="mm-active">
+                    <a href="{{ route('activities.index') }}" class="mm-active">
                         <i class="metismenu-icon pe-7s-graph1"></i>
                         Activity
                     </a>
