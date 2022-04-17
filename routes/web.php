@@ -17,10 +17,6 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-// Route::get('/static/{page}', function ($page) {
-//     return view("static.{$page}");
-// })->middleware(['guest']);
-
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/activity', function () {
         return view('static.index');
