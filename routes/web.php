@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,12 @@ Route::get('/', function () {
 
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+
+    Route::prefix('settings')->controller(SettingController::class)->group(function () {
+        Route::get('/', 'index')->name('settings.index');
+        Route::get('/edit', 'edit')->name('settings.edit');
+        Route::patch('/', 'update')->name('settings.update');
+    });
 });
 
 require __DIR__ . '/auth.php';

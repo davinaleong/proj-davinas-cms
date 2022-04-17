@@ -39,7 +39,7 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                    <i class="pe-7s-graph1 icon-gradient bg-mixed-hopes"></i>
+                                    @yield('page-icon')
                                 </div>
                                 <div>
                                     @yield('page-title')

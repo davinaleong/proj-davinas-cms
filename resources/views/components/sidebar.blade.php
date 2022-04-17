@@ -82,14 +82,28 @@
                         </li>
                     </ul>
                 </li>
-                <li class="app-sidebar__heading">Settings</li>
+                <li class="app-sidebar__heading">Misc</li>
                 <li>
-                    <a href="settings.html">
+                    <a href="#">
                         <i class="metismenu-icon pe-7s-settings"></i>
-                        Modify
+                        Settings
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('settings.index') }}">
+                                <i class="metismenu-icon pe-7s-note2"></i>
+                                List Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('settings.edit') }}">
+                                <i class="metismenu-icon pe-7s-plus"></i>
+                                Modify Settings
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-            </ul>
         </div>
     </div>
 </div>

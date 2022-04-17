@@ -4,6 +4,10 @@
     <li class="breadcrumb-item active" aria-current="page">Activity</li>
 @endsection
 
+@section('page-icon')
+    <i class="pe-7s-graph1 icon-gradient bg-mixed-hopes"></i>
+@endsection
+
 @section('page-title', 'Activity')
 
 @section('content')
