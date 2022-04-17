@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
-Route::get('/static/{page}', function ($page) {
-    return view("static.{$page}");
-})->middleware(['guest']);
+// Route::get('/static/{page}', function ($page) {
+//     return view("static.{$page}");
+// })->middleware(['guest']);
 
-Route::get('/hello', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::prefix('cms')->middleware(['auth'])->group(function () {
+    Route::get('/activity', function () {
+        return view('static.index');
+    })->name('activity');
+});
 
 require __DIR__ . '/auth.php';

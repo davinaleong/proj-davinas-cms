@@ -58,22 +58,26 @@
                                     <div class="dropdown-menu-header">
                                         <div class="dropdown-menu-header-inner bg-info">
                                             <div class="menu-header-image opacity-2"
-                                                style="background-image: url('images/dropdown-header/city3.jpg');">
+                                                style="background-image: url({{ asset('images/dropdown-header/city3.jpg') }});">
                                             </div>
                                             <div class="menu-header-content text-start">
                                                 <div class="widget-content p-0">
                                                     <div class="widget-content-wrapper">
                                                         <div class="widget-content-left me-3">
                                                             <img width="42" class="rounded-circle"
-                                                                src="images/avatars/1.jpg" alt="">
+                                                                src="{{ asset('images/avatars/1.jpg') }}" alt="">
                                                         </div>
                                                         <div class="widget-content-left">
                                                             <div class="widget-heading">Alina Mcloughlin</div>
                                                         </div>
                                                         <div class="widget-content-right me-2">
                                                             <!-- <button class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</button> -->
-                                                            <a href="login.html"
-                                                                class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</a>
+                                                            <form method="POST" action="{{ route('logout') }}">
+                                                                @csrf
+                                                                <a href="{{ route('logout') }}"
+                                                                    onclick="event.preventDefault(); this.closest('form').submit();"
+                                                                    class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</a>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
