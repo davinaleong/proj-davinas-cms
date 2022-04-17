@@ -11,7 +11,7 @@ class SettingTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_have_a_user()
+    public function test_has_a_user()
     {
         $setting = Setting::factory()->create();
 
