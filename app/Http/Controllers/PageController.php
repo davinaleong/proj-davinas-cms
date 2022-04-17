@@ -17,7 +17,10 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.index', [
+            'page' => Page::orderByDesc('created_at')
+                ->paginate(Setting::getListPerPage()),
+        ]);
     }
 
     /**
@@ -27,7 +30,9 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.create', [
+            'user_name' => Auth::user()->name
+        ]);
     }
 
     /**
@@ -38,51 +43,108 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string',
+            'meta_title' => 'required|string|max:255',
+            'meta_description' => 'required|string',
+        ]);
+
+        $page = Page::create([
+            'user_id' => Auth::id(),
+            'name' => $request->input('name'),
+            'title' => $request->input('title'),
+            'subtitle' => $request->input('subtitle'),
+            'meta_title' => $request->input('meta_title'),
+            'meta_description' => $request->input('meta_description'),
+        ]);
+
+        Activity::create([
+            'user_id' => Auth::id(),
+            'message' => 'Page ' . $page->name . ' created.',
+            'label' => 'View Page',
+            'link' => route('pages.show', ['page' => $page])
+        ]);
+
+        return redirect(route('pages.show', ['page' => $page]))
+            ->with('message', 'Page created.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Page $page)
     {
-        //
+        return view('page.show', [
+            'page' => $page
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Page $page)
     {
-        //
+        return view('page.edit', [
+            'page' => $page
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Page $page)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string',
+            'meta_title' => 'required|string|max:255',
+            'meta_description' => 'required|string',
+        ]);
+
+        $page->user_id = Auth::id();
+        $page->name = $request->input('name');
+        $page->title = $request->input('title');
+        $page->subtitle = $request->input('subtitle');
+        $page->meta_title = $request->input('meta_title');
+        $page->meta_description = $request->input('meta_description');
+        $page->save();
+
+        Activity::create([
+            'user_id' => Auth::id(),
+            'message' => 'Page ' . $page->name . ' created.',
+            'label' => 'View Page',
+            'link' => route('pages.show', ['page' => $page])
+        ]);
+
+        return redirect(route('pages.show', ['page' => $page]))
+            ->with('message', 'Page modified.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        //
+        $page_name = $page->name;
+        $page->delete();
+
+        return redirect(route('pages.index'))
+            ->with('message', 'Page deleted.');
     }
 }

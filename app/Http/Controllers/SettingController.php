@@ -16,7 +16,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('setting.index', [
+        return view('settings.index', [
             'settings' => Setting::paginate(Setting::getListPerPage()),
         ]);
     }
@@ -29,7 +29,7 @@ class SettingController extends Controller
      */
     public function edit()
     {
-        return view('setting.edit', [
+        return view('settings.edit', [
             'settings' => Setting::all(),
             'settings_count' => Setting::count()
         ]);

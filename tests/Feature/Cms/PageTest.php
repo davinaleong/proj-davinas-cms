@@ -163,7 +163,7 @@ class PageTest extends TestCase
             ]);
         $response->assertStatus(302);
         $response->assertRedirect('cms/pages/' . $page->id);
-        $response->assertSessionHas('message', 'Page created.');
+        $response->assertSessionHas('message', 'Page modified.');
 
         $this->assertDatabaseHas('pages', [
             'id' => $page->id,
@@ -219,6 +219,7 @@ class PageTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertRedirect('cms/pages');
+        $response->assertSessionHas('message', 'Page deleted.');
 
         $this->assertSoftDeleted('pages', [
             'id' => $page->id
