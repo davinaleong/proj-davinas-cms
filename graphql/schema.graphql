@@ -21,6 +21,9 @@ type Query {
     ): [Post!]!
         @paginate(defaultCount: 10)
         @orderBy(column: "published_at", direction: DESC)
+
+    "Gets a list of folders."
+    folders(year: Int): [Folder!]! @orderBy(column: "year", direction: DESC)
 }
 
 "A page of the blog."
@@ -61,4 +64,10 @@ type Post {
     metaDescription: String
     "The date the post was published."
     publishedAt: DateTime
+}
+
+"The archive folder the post is in."
+type Folder {
+    "The year of the folder."
+    year: Int!
 }
