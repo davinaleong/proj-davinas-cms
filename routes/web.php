@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     });
 
     Route::resource('pages', PageController::class);
+    Route::resource('posts', PostController::class);
 });
 
 require __DIR__ . '/auth.php';

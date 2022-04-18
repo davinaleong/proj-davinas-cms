@@ -140,7 +140,7 @@ class PageControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
-    public function test_user_can_update_page()
+    public function test_user_can_update_a_page()
     {
         $user = User::factory()->create();
         $page = Page::factory()->for($user)->create();
