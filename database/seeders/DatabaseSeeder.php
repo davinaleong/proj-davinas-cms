@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make(env('ROOT_PASSWORD', 'helloWorld')),
         ]);
 
-        DB::table('other_settings')->insert([
+        DB::table('settings')->insert([
             [
                 'user_id' => 1,
                 'name' => 'Items per page',
