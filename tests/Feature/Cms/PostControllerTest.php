@@ -72,10 +72,12 @@ class PostControllerTest extends TestCase
                 'featured' => $post->featured,
                 'meta_title' => $post->meta_title,
                 'meta_description' => $post->meta_description,
+                'featured' => (int) $post->featured,
+                'published_at' => $post->published_at
             ]);
         $response->assertStatus(302);
         $response->assertRedirect('cms/posts/1');
-        $response->assertSessionHas('message', 'post created.');
+        $response->assertSessionHas('message', 'Post created.');
 
         $this->assertDatabaseHas('posts', [
             'user_id' => $user->id,
@@ -108,7 +110,7 @@ class PostControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
             'name', 'title', 'subtitle',
-            'text', 'featured', 'meta_title', 'meta_description', 'published_at'
+            'text', 'meta_title', 'meta_description', 'published_at'
         ]);
     }
 
