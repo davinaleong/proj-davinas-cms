@@ -20,7 +20,7 @@ class Post extends Base
 
     public static function generateSummary($text)
     {
-        return Str::words(strip_tags($text), 200, '...');
+        return Str::words(strip_tags($text), 50, '...');
     }
 
     public function getPublishedAt()

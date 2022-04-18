@@ -53,7 +53,7 @@ class PostControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
-    public function test_user_can_store_post()
+    public function test_user_can_store_a_post()
     {
         $user = User::factory()->create();
         $post = Post::factory()->for($user)->make();
@@ -149,6 +149,7 @@ class PostControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
+    /** @group failed */
     public function test_user_can_update_a_post()
     {
         $user = User::factory()->create();
@@ -170,6 +171,8 @@ class PostControllerTest extends TestCase
                 'featured' => $edited_post->featured,
                 'meta_title' => $edited_post->meta_title,
                 'meta_description' => $edited_post->meta_description,
+                'featured' => (int) $post->featured,
+                'published_at' => $edited_post->published_at,
             ]);
         $response->assertStatus(302);
         $response->assertRedirect('cms/posts/' . $post->id);

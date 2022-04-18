@@ -57,10 +57,6 @@ class PostController extends Controller
 
         $featured = $request->input('featured') ? true : false;
 
-        if ($featured) {
-            Post::update(['featured' => false]);
-        }
-
         $name = $request->input('name');
         $text = $request->input('text');
 
@@ -77,6 +73,10 @@ class PostController extends Controller
             'meta_description' => $request->input('meta_description'),
             'published_at' => $request->input('published_at'),
         ]);
+
+        if ($featured) {
+            Post::whereNot('id', $post->id)->update(['featured' => false]);
+        }
 
         Activity::create([
             'user_id' => Auth::id(),
@@ -137,10 +137,6 @@ class PostController extends Controller
 
         $featured = $request->input('featured') ? true : false;
 
-        if ($featured) {
-            Post::whereNot('id', $post->id)->update(['featured' => false]);
-        }
-
         $name = $request->input('name');
         $text = $request->input('text');
 
@@ -156,6 +152,10 @@ class PostController extends Controller
         $post->meta_description = $request->input('meta_description');
         $post->published_at = $request->input('published_at');
         $post->save();
+
+        if ($featured) {
+            Post::whereNot('id', $post->id)->update(['featured' => false]);
+        }
 
         Activity::create([
             'user_id' => Auth::id(),

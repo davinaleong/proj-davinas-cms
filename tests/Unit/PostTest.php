@@ -69,7 +69,7 @@ class PostTest extends TestCase
         for ($i = 0; $i < 5; $i++) {
             $text .= '<p>' . $this->faker->paragraph(5, true) . '</p>';
         }
-        $summary = Str::words(strip_tags($text), 200, '...');
+        $summary = Str::words(strip_tags($text), 50, '...');
 
         $this->assertEquals($summary, Post::generateSummary($text));
     }
