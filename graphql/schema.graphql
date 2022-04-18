@@ -5,7 +5,7 @@ scalar DateTime
 "Indicates what fields are available at the top level of a query operation."
 type Query {
     "Gets a page."
-    page(
+    pages(
         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
         name: String @where(operator: "like")
     ): [Page!]! @paginate(defaultCount: 1)
@@ -18,7 +18,9 @@ type Query {
         year: Int
         "Filter a single post by the slug"
         slug: String
-    ): [Post!]! @paginate(defaultCount: 10) @orderByDesc('published_at')
+    ): [Post!]!
+        @paginate(defaultCount: 10)
+        @orderBy(column: "published_at", direction: DESC)
 }
 
 "A page of the blog."
