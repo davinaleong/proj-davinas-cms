@@ -5,12 +5,14 @@ namespace Tests\Unit;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
-/** @group new */
 class PostTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     public function test_has_a_user()
     {
@@ -42,5 +44,24 @@ class PostTest extends TestCase
         ]);
 
         $this->assertEquals('01 Apr 2022 12:00:00', $post->getUpdatedAt());
+    }
+
+    public function test_generate_slug()
+    {
+        $name = $this->faker->name();
+        $slug = Str::slug($name);
+
+        $this->assertEquals($slug, Post::generateSlug($name));
+    }
+
+    public function test_generate_summary()
+    {
+        $text = '';
+        for ($i = 0; $i < 5; $i++) {
+            $text .= '<p>' . $this->faker->paragraph(5, true) . '</p>';
+        }
+        $summary = Str::words(strip_tags($text), 200, '...');
+
+        $this->assertEquals($summary, Post::generateSummary($text));
     }
 }
