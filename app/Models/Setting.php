@@ -12,6 +12,8 @@ class Setting extends Base
     public static $KEY_LIST_PER_PAGE = 'LIST_PER_PAGE';
     public static $KEY_DB_DT_FORMAT = 'DB_DT_FORMAT';
     public static $KEY_SYSTEM_DT_FORMAT = 'SYSTEM_DT_FORMAT';
+    public static $KEY_DB_DATE_FORMAT = 'KEY_DB_DATE_FORMAT';
+    public static $KEY_SYSTEM_DATE_FORMAT = 'SYSTEM_DATE_FORMAT';
 
     public static function getByKey(string $key)
     {
@@ -30,6 +32,8 @@ class Setting extends Base
             Setting::$KEY_LIST_PER_PAGE,
             Setting::$KEY_DB_DT_FORMAT,
             Setting::$KEY_SYSTEM_DT_FORMAT,
+            Setting::$KEY_DB_DATE_FORMAT,
+            Setting::$KEY_SYSTEM_DATE_FORMAT,
         ];
     }
 
@@ -61,6 +65,30 @@ class Setting extends Base
     {
         $value = env(Setting::$KEY_SYSTEM_DT_FORMAT);
         $setting = Setting::getByKey(Setting::$KEY_DB_DT_FORMAT);
+
+        if (filled($setting)) {
+            $value = $setting->value;
+        }
+
+        return $value;
+    }
+
+    public static function getDbDateFormat()
+    {
+        $value = env(Setting::$KEY_DB_DATE_FORMAT);
+        $setting = Setting::getByKey(Setting::$KEY_DB_DATE_FORMAT);
+
+        if (filled($setting)) {
+            $value = $setting->value;
+        }
+
+        return $value;
+    }
+
+    public static function getSystemDateFormat()
+    {
+        $value = env(Setting::$KEY_SYSTEM_DATE_FORMAT);
+        $setting = Setting::getByKey(Setting::$KEY_DB_DATE_FORMAT);
 
         if (filled($setting)) {
             $value = $setting->value;

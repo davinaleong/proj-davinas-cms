@@ -35,5 +35,16 @@ class DatabaseSeeder extends Seeder
             'key' => \App\Models\Setting::$KEY_SYSTEM_DT_FORMAT,
             'value' => env(\App\Models\Setting::$KEY_SYSTEM_DT_FORMAT, 'd M Y H:i:s')
         ]);
+
+        \App\Models\Setting::factory()->for($user)->create([
+            'name' => 'DB Date Format',
+            'key' => \App\Models\Setting::$KEY_DB_DATE_FORMAT,
+            'value' => env(\App\Models\Setting::$KEY_DB_DATE_FORMAT, 'Y-m-d ')
+        ]);
+        \App\Models\Setting::factory()->for($user)->create([
+            'name' => 'System Date Format',
+            'key' => \App\Models\Setting::$KEY_SYSTEM_DATE_FORMAT,
+            'value' => env(\App\Models\Setting::$KEY_SYSTEM_DATE_FORMAT, 'd M Y')
+        ]);
     }
 }
