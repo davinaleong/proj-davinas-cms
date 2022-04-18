@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Cms\ActivityController;
+use App\Http\Controllers\Cms\PageController;
+use App\Http\Controllers\Cms\PostController;
+use App\Http\Controllers\Cms\SearchController;
+use App\Http\Controllers\Cms\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*

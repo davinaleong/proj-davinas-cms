@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Setting;
 use App\Models\Post;
