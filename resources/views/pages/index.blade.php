@@ -8,7 +8,7 @@
     <i class="pe-7s-browser icon-gradient bg-mixed-hopes"></i>
 @endsection
 
-@section('page-title', 'Page')
+@section('page-title', 'Pages')
 
 @section('page-actions')
     <div class="page-title-actions">
