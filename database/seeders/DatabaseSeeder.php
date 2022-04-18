@@ -52,6 +52,11 @@ class DatabaseSeeder extends Seeder
             'key' => \App\Models\Setting::$KEY_SYSTEM_DATE_FORMAT,
             'value' => env(\App\Models\Setting::$KEY_SYSTEM_DATE_FORMAT, 'd M Y')
         ]);
+        \App\Models\Setting::factory()->for($user)->create([
+            'name' => 'Year Format',
+            'key' => \App\Models\Setting::$KEY_YEAR_FORMAT,
+            'value' => env(\App\Models\Setting::$KEY_YEAR_FORMAT, 'Y')
+        ]);
 
         //\App\Models\Post::factory(60)->for($user)->create();
     }

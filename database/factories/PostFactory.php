@@ -24,7 +24,7 @@ class PostFactory extends Factory
 
         return [
             'user_id' => \App\Models\User::factory(),
-            'folder_id' => 0,
+            //'folder_id' => \App\Models\Folder::factory(),
             'name' => $name,
             'slug' => Post::generateSlug($name),
             'title' => $this->faker->sentence(10, true),

@@ -15,6 +15,7 @@ class Setting extends Base
     public static $KEY_SYSTEM_DT_FORMAT = 'SYSTEM_DT_FORMAT';
     public static $KEY_DB_DATE_FORMAT = 'DB_DATE_FORMAT';
     public static $KEY_SYSTEM_DATE_FORMAT = 'SYSTEM_DATE_FORMAT';
+    public static $KEY_YEAR_FORMAT = 'YEAR_FORMAT';
 
     public static function getByKey(string $key)
     {
@@ -36,6 +37,7 @@ class Setting extends Base
             Setting::$KEY_SYSTEM_DT_FORMAT,
             Setting::$KEY_DB_DATE_FORMAT,
             Setting::$KEY_SYSTEM_DATE_FORMAT,
+            Setting::$KEY_YEAR_FORMAT,
         ];
     }
 
@@ -102,7 +104,19 @@ class Setting extends Base
     public static function getSystemDateFormat()
     {
         $value = env(Setting::$KEY_SYSTEM_DATE_FORMAT);
-        $setting = Setting::getByKey(Setting::$KEY_DB_DATE_FORMAT);
+        $setting = Setting::getByKey(Setting::$KEY_SYSTEM_DATE_FORMAT);
+
+        if (filled($setting)) {
+            $value = $setting->value;
+        }
+
+        return $value;
+    }
+
+    public static function getYearFormat()
+    {
+        $value = env(Setting::$KEY_YEAR_FORMAT);
+        $setting = Setting::getByKey(Setting::$KEY_YEAR_FORMAT);
 
         if (filled($setting)) {
             $value = $setting->value;

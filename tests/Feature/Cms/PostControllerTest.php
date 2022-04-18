@@ -3,6 +3,7 @@
 namespace Tests\Feature\Cms;
 
 use App\Models\Activity;
+use App\Models\Folder;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -178,13 +179,13 @@ class PostControllerTest extends TestCase
 
         $this->assertDatabaseHas('posts', [
             'id' => $post->id,
-            'user_id' => $user->id,
+            'user_id' => (string) $user->id,
             'name' => $edited_post->name,
             'slug' => $edited_post->slug,
             'title' => $edited_post->title,
             'subtitle' => $edited_post->subtitle,
             'subtitle' => $edited_post->subtitle,
-            'featured' => (int) $edited_post->featured,
+            'featured' => (string) $edited_post->featured,
             'meta_title' => $edited_post->meta_title,
             'meta_description' => $edited_post->meta_description,
         ]);
