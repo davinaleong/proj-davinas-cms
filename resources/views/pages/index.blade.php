@@ -42,7 +42,8 @@
                             <td>{{ $page->getCreatedAt() }}</td>
                             <td>{{ $page->getUpdatedAt() }}</td>
                             <td>
-                                <a href="{{ route('pages.show', ['page' => $page]) }}" class="btn btn-info">View</a>
+                                <a href="{{ route('pages.show', ['page' => $page]) }}" class="btn btn-info"><i
+                                        class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

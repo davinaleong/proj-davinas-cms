@@ -69,13 +69,13 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="list-posts.html">
+                            <a href="{{ route('posts.index') }}">
                                 <i class="metismenu-icon pe-7s-note2"></i>
                                 List Posts
                             </a>
                         </li>
                         <li>
-                            <a href="add-post.html">
+                            <a href="{{ route('posts.create') }}">
                                 <i class="metismenu-icon pe-7s-plus"></i>
                                 Add Post
                             </a>
