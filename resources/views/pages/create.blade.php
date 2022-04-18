@@ -30,7 +30,7 @@
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-subtitle" class="form-label">Subtitle</label>
-                    <textarea name="metaTitle" id="input-subtitle" class="form-control" rows="4"
+                    <textarea name="subtitle" id="input-subtitle" class="form-control" rows="4"
                         required>{{ old('subtitle') }}</textarea>
                 </div>
                 <div class="position-relative mb-3">
@@ -40,8 +40,8 @@
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-meta_description" class="form-label">Meta Description</label>
-                    <textarea name="meta_title" id="input-meta_description" class="form-control" rows="2"
-                        required>{{ old('meta_descriotion') }}</textarea>
+                    <textarea name="meta_description" id="input-meta_description" class="form-control" rows="2"
+                        required>{{ old('meta_description') }}</textarea>
                 </div>
 
                 @include('components.errors')
@@ -50,13 +50,4 @@
             </form>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector("#input-text"))
-            .catch(error => console.error("CKEditor Error: ", error))
-    </script>
 @endsection
