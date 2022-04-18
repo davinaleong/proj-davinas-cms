@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 /** @group new */
-class PageTest extends TestCase
+class PageControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -32,7 +32,7 @@ class PageTest extends TestCase
 
     public function test_guest_gets_redirected_from_create()
     {
-        $this->get('cms/settings/create')
+        $this->get('cms/pages/create')
             ->assertStatus(302)
             ->assertRedirect('/login');
     }
@@ -42,7 +42,7 @@ class PageTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->get('cms/settings/create')
+            ->get('cms/pages/create')
             ->assertOk();
     }
 
@@ -76,7 +76,7 @@ class PageTest extends TestCase
         $response->assertSessionHas('message', 'Page created.');
 
         $this->assertDatabaseHas('pages', [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
             'name' => $page->name,
             'meta_title' => $page->meta_title,
             'meta_description' => $page->meta_description,
@@ -115,7 +115,7 @@ class PageTest extends TestCase
 
     public function test_user_can_access_show()
     {
-        $user = User::factory()->show();
+        $user = User::factory()->create();
         $page = Page::factory()->create();
 
         $this->actingAs($user)
@@ -125,7 +125,7 @@ class PageTest extends TestCase
 
     public function test_user_accessing_non_existant_page_returns_error()
     {
-        $user = User::factory()->show();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->get('cms/pages/1')
@@ -136,7 +136,7 @@ class PageTest extends TestCase
     {
         $page = Page::factory()->create();
 
-        $this->post('cms/pages/' . $page->id)
+        $this->patch('cms/pages/' . $page->id)
             ->assertStatus(302)
             ->assertRedirect('/login');
     }
@@ -167,7 +167,7 @@ class PageTest extends TestCase
 
         $this->assertDatabaseHas('pages', [
             'id' => $page->id,
-            'user_id' => $user_id,
+            'user_id' => $user->id,
             'name' => $edited_page->name,
             'meta_title' => $edited_page->meta_title,
             'meta_description' => $edited_page->meta_description,

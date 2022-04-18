@@ -124,7 +124,7 @@ class PageController extends Controller
 
         Activity::create([
             'user_id' => Auth::id(),
-            'message' => 'Page ' . $page->name . ' created.',
+            'message' => 'Page ' . $page->name . ' modified.',
             'label' => 'View Page',
             'link' => route('pages.show', ['page' => $page])
         ]);
@@ -143,6 +143,11 @@ class PageController extends Controller
     {
         $page_name = $page->name;
         $page->delete();
+
+        Activity::create([
+            'user_id' => Auth::id(),
+            'message' => 'Page ' . $page->name . ' deleted.'
+        ]);
 
         return redirect(route('pages.index'))
             ->with('message', 'Page deleted.');
