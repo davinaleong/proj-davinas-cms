@@ -13,6 +13,8 @@
 @section('content')
     <div class="main-card mb-3 card">
         <div class="card-body">
+            <p class="mb-3 text-italic">Search results for "{{ $term }}"</p>
+
             <h5 class="card-title">List Pages</h5>
             <table id="pagesTable" class="mb-3 table">
                 <thead>

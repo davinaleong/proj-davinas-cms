@@ -31,15 +31,17 @@
     </div>
     <div class="app-header__content">
         <div class="app-header-left">
-            <div class="search-wrapper">
+            <form method="POST" action="{{ route('search.post') }}" class="search-wrapper">
                 <div class="input-holder">
-                    <input type="text" class="search-input" placeholder="Type to search">
-                    <button class="search-icon">
+                    @csrf
+                    <input type="text" name="term" class="search-input" placeholder="Type to search">
+                    <input type="submit" hidden>
+                    <button type="button" class="search-icon">
                         <span></span>
                     </button>
                 </div>
                 <button class="btn-close"></button>
-            </div>
+            </form>
         </div>
         <div class="app-header-right">
             <div class="header-btn-lg pe-0">
