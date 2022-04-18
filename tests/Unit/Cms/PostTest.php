@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Models\Post;
-use App\Models\User;
+use App\Models\Cms\Post;
+use App\Models\Cms\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
