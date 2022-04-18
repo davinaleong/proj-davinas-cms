@@ -178,14 +178,13 @@ class PostControllerTest extends TestCase
         $response->assertSessionHas('message', 'Post modified.');
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
+            'id' => (string) $post->id,
             'user_id' => (string) $user->id,
             'name' => $edited_post->name,
             'slug' => $edited_post->slug,
             'title' => $edited_post->title,
             'subtitle' => $edited_post->subtitle,
-            'subtitle' => $edited_post->subtitle,
-            'featured' => (string) $edited_post->featured,
+            'text' => $edited_post->text,
             'meta_title' => $edited_post->meta_title,
             'meta_description' => $edited_post->meta_description,
         ]);
