@@ -50,11 +50,11 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'subtitle' => 'nullable|string',
             'text' => 'required|string',
             'featured' => 'nullable|int',
             'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string',
+            'meta_description' => 'nullable|string',
             'published_at' => 'required|date|dateFormat:Y-m-d',
         ]);
 
@@ -140,11 +140,11 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'subtitle' => 'nullable|string',
             'text' => 'required|string',
             'featured' => 'nullable|int',
             'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string',
+            'meta_description' => 'nullable|string',
             'published_at' => 'required|date|dateFormat:Y-m-d',
         ]);
 

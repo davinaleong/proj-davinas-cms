@@ -16,7 +16,7 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->string('label', 255)->nullable();
             $table->text('link')->nullable();
             $table->timestamps();

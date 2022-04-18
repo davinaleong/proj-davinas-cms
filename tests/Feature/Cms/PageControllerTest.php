@@ -52,7 +52,7 @@ class PageControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
-    public function test_user_can_store_page()
+    public function test_user_can_store_a_page()
     {
         $user = User::factory()->create();
         $page = Page::factory()->for($user)->make();
@@ -66,9 +66,9 @@ class PageControllerTest extends TestCase
             ->post('cms/pages', [
                 'name' => $page->name,
                 'meta_title' => $page->meta_title,
-                'meta_description' => $page->meta_description,
+                //'meta_description' => $page->meta_description,
                 'title' => $page->title,
-                'subtitle' => $page->subtitle
+                //'subtitle' => $page->subtitle
             ]);
         $response->assertStatus(302);
         $response->assertRedirect('cms/pages/1');
@@ -78,9 +78,9 @@ class PageControllerTest extends TestCase
             'user_id' => $user->id,
             'name' => $page->name,
             'meta_title' => $page->meta_title,
-            'meta_description' => $page->meta_description,
+            //'meta_description' => $page->meta_description,
             'title' => $page->title,
-            'subtitle' => $page->subtitle
+            //'subtitle' => $page->subtitle
         ]);
 
         $this->assertDatabaseHas('activities', [
@@ -100,7 +100,7 @@ class PageControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle', 'meta_title', 'meta_description'
+            'name', 'title', 'meta_title'
         ]);
     }
 
@@ -156,9 +156,9 @@ class PageControllerTest extends TestCase
             ->patch('cms/pages/' . $page->id, [
                 'name' => $edited_page->name,
                 'meta_title' => $edited_page->meta_title,
-                'meta_description' => $edited_page->meta_description,
+                //'meta_description' => $edited_page->meta_description,
                 'title' => $edited_page->title,
-                'subtitle' => $edited_page->subtitle
+                //'subtitle' => $edited_page->subtitle
             ]);
         $response->assertStatus(302);
         $response->assertRedirect('cms/pages/' . $page->id);
@@ -169,9 +169,9 @@ class PageControllerTest extends TestCase
             'user_id' => $user->id,
             'name' => $edited_page->name,
             'meta_title' => $edited_page->meta_title,
-            'meta_description' => $edited_page->meta_description,
+            //'meta_description' => $edited_page->meta_description,
             'title' => $edited_page->title,
-            'subtitle' => $edited_page->subtitle
+            //'subtitle' => $edited_page->subtitle
         ]);
 
         $this->assertDatabaseHas('activities', [
@@ -192,7 +192,7 @@ class PageControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle', 'meta_title', 'meta_description'
+            'name', 'title', 'meta_title'
         ]);
     }
 
