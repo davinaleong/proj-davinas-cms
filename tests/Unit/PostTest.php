@@ -46,6 +46,15 @@ class PostTest extends TestCase
         $this->assertEquals('01 Apr 2022 12:00:00', $post->getUpdatedAt());
     }
 
+    public function test_can_get_published_at()
+    {
+        $post = Post::factory()->create([
+            'published_at' => '2022-04-01'
+        ]);
+
+        $this->assertEquals('01 Apr 2022', $post->getPublishedAt());
+    }
+
     public function test_generate_slug()
     {
         $name = $this->faker->name();

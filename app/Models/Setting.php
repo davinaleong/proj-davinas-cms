@@ -12,7 +12,7 @@ class Setting extends Base
     public static $KEY_LIST_PER_PAGE = 'LIST_PER_PAGE';
     public static $KEY_DB_DT_FORMAT = 'DB_DT_FORMAT';
     public static $KEY_SYSTEM_DT_FORMAT = 'SYSTEM_DT_FORMAT';
-    public static $KEY_DB_DATE_FORMAT = 'KEY_DB_DATE_FORMAT';
+    public static $KEY_DB_DATE_FORMAT = 'DB_DATE_FORMAT';
     public static $KEY_SYSTEM_DATE_FORMAT = 'SYSTEM_DATE_FORMAT';
 
     public static function getByKey(string $key)
