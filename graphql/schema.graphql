@@ -75,5 +75,8 @@ type Folder {
     "Folder's name. Used for filters."
     name: String!
     "Posts that belong to the folder."
-    posts: [Post!]! @hasMany
+    posts: [Post!]!
+        @hasMany
+        @paginate(defaultCount: 10)
+        @orderBy(column: "published_at", direction: DESC)
 }
