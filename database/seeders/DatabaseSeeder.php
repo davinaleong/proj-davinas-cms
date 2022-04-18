@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Setting::factory()->for($user)->create([
             'name' => 'Search items per page',
-            'key' => \App\Models\Setting::$KEY_LIST_PER_PAGE,
-            'value' => env(\App\Models\Setting::$KEY_LIST_PER_PAGE, 50)
+            'key' => \App\Models\Setting::$KEY_SEARCH_PER_PAGE,
+            'value' => env(\App\Models\Setting::$KEY_SEARCH_PER_PAGE, 50)
         ]);
         \App\Models\Setting::factory()->for($user)->create([
             'name' => 'DB Datetime Format',
