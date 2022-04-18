@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Models\Cms\Activity;
-use App\Models\Cms\Setting;
-use App\Models\Cms\User;
+use App\Models\Activity;
+use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
