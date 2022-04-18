@@ -18,7 +18,7 @@ type Query {
         year: Int
         "Filter a single post by the slug"
         slug: String
-    ): [Post!]! @paginate(defaultCount: 10)
+    ): [Post!]! @paginate(defaultCount: 10) @orderByDesc('published_at')
 }
 
 "A page of the blog."
