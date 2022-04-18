@@ -10,6 +10,7 @@ class Setting extends Base
     use HasFactory;
 
     public static $KEY_LIST_PER_PAGE = 'LIST_PER_PAGE';
+    public static $KEY_SEARCH_PER_PAGE = 'SEARCH_PER_PAGE';
     public static $KEY_DB_DT_FORMAT = 'DB_DT_FORMAT';
     public static $KEY_SYSTEM_DT_FORMAT = 'SYSTEM_DT_FORMAT';
     public static $KEY_DB_DATE_FORMAT = 'DB_DATE_FORMAT';
@@ -30,6 +31,7 @@ class Setting extends Base
     {
         return [
             Setting::$KEY_LIST_PER_PAGE,
+            Setting::$KEY_SEARCH_PER_PAGE,
             Setting::$KEY_DB_DT_FORMAT,
             Setting::$KEY_SYSTEM_DT_FORMAT,
             Setting::$KEY_DB_DATE_FORMAT,
@@ -41,6 +43,18 @@ class Setting extends Base
     {
         $value = env(Setting::$KEY_LIST_PER_PAGE);
         $setting = Setting::getByKey(Setting::$KEY_LIST_PER_PAGE);
+
+        if (filled($setting)) {
+            $value = $setting->value;
+        }
+
+        return $value;
+    }
+
+    public static function getSearchPerPage()
+    {
+        $value = env(Setting::$KEY_SEARCH_PER_PAGE);
+        $setting = Setting::getByKey(Setting::$KEY_SEARCH_PER_PAGE);
 
         if (filled($setting)) {
             $value = $setting->value;

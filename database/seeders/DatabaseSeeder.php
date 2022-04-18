@@ -19,9 +19,16 @@ class DatabaseSeeder extends Seeder
             'email' => env('ROOT_EMAIL', 'johndoe@example.com'),
             'password' => Hash::make(env('ROOT_PASSWORD', 'helloWorld'))
         ]);
-        // \App\Models\Activity::factory(60)->create();
+
+        // \App\Models\Activity::factory(60)->for($user)->create();
+
         \App\Models\Setting::factory()->for($user)->create([
             'name' => 'Items per page',
+            'key' => \App\Models\Setting::$KEY_LIST_PER_PAGE,
+            'value' => env(\App\Models\Setting::$KEY_LIST_PER_PAGE, 50)
+        ]);
+        \App\Models\Setting::factory()->for($user)->create([
+            'name' => 'Search items per page',
             'key' => \App\Models\Setting::$KEY_LIST_PER_PAGE,
             'value' => env(\App\Models\Setting::$KEY_LIST_PER_PAGE, 50)
         ]);
@@ -46,6 +53,6 @@ class DatabaseSeeder extends Seeder
             'value' => env(\App\Models\Setting::$KEY_SYSTEM_DATE_FORMAT, 'd M Y')
         ]);
 
-        \App\Models\Post::factory(60)->for($user)->create();
+        //\App\Models\Post::factory(60)->for($user)->create();
     }
 }

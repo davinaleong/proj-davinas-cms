@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-/** @group new */
 class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -149,7 +148,6 @@ class PostControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
-    /** @group failed */
     public function test_user_can_update_a_post()
     {
         $user = User::factory()->create();
