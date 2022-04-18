@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,11 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::resource('pages', PageController::class);
     Route::resource('posts', PostController::class);
+
+    Route::prefix('search')->controller(SearchController::class)->group(function () {
+        Route::post('/', 'post')->name('search.post');
+        Route::get('/results', 'results')->name('search.results');
+    });
 });
 
 require __DIR__ . '/auth.php';
