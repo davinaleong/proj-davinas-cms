@@ -21,11 +21,11 @@ class CreatePostsTable extends Migration
             $table->text('slug', 255);
             $table->text('subtitle');
             $table->text('summary');
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->string('meta_title', 255);
             $table->text('meta_description');
             $table->boolean('featured');
-            $table->dateTime('published_at');
+            $table->date('published_at');
             $table->timestamps();
             $table->softDeletes();
         });

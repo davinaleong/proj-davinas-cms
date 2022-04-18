@@ -109,8 +109,7 @@ class PostControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle',
-            'text', 'meta_title', 'meta_description', 'published_at'
+            'name', 'title', 'subtitle', 'meta_title', 'meta_description', 'published_at'
         ]);
     }
 
@@ -207,8 +206,7 @@ class PostControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle',
-            'text', 'featured', 'meta_title', 'meta_description', 'published_at'
+            'name', 'title', 'subtitle', 'meta_title', 'meta_description', 'published_at'
         ]);
     }
 
