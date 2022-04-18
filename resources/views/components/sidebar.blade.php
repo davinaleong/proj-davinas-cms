@@ -48,13 +48,13 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="list-pages.html">
+                            <a href="{{ route('pages.index') }}">
                                 <i class="metismenu-icon pe-7s-note2"></i>
                                 List Pages
                             </a>
                         </li>
                         <li>
-                            <a href="add-page.html">
+                            <a href="{{ route('pages.create') }}">
                                 <i class="metismenu-icon pe-7s-plus"></i>
                                 Add Page
                             </a>
