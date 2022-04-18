@@ -75,6 +75,7 @@ class PostController extends Controller
             'featured' => $featured,
             'meta_title' => $request->input('meta_title'),
             'meta_description' => $request->input('meta_description'),
+            'published_at' => $request->input('published_at'),
         ]);
 
         Activity::create([
@@ -127,46 +128,63 @@ class PostController extends Controller
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'subtitle' => 'required|string',
+            'text' => 'required|string',
+            'featured' => 'nullable|int',
             'meta_title' => 'required|string|max:255',
             'meta_description' => 'required|string',
+            'published_at' => 'required|date|dateFormat:Y-m-d',
         ]);
 
+        $featured = $request->input('featured') ? true : false;
+
+        if ($featured) {
+            Post::whereNot('id', $post->id)->update(['featured' => false]);
+        }
+
+        $name = $request->input('name');
+        $text = $request->input('text');
+
         $post->user_id = Auth::id();
-        $post->name = $request->input('name');
+        $post->name = $name;
+        $post->slug = Post::generateSlug($name);
         $post->title = $request->input('title');
         $post->subtitle = $request->input('subtitle');
+        $post->summary = Post::generateSummary($text);
+        $post->text = $text;
+        $post->featured = $featured;
         $post->meta_title = $request->input('meta_title');
         $post->meta_description = $request->input('meta_description');
+        $post->published_at = $request->input('published_at');
         $post->save();
 
         Activity::create([
             'user_id' => Auth::id(),
-            'message' => 'post ' . $post->name . ' modified.',
-            'label' => 'View post',
+            'message' => 'Post ' . $post->name . ' modified.',
+            'label' => 'View Post',
             'link' => route('posts.show', ['post' => $post])
         ]);
 
         return redirect(route('posts.show', ['post' => $post]))
-            ->with('message', 'post modified.');
+            ->with('message', 'Post modified.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  post  $post
+     * @param  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(post $post)
+    public function destroy(Post $post)
     {
         $post_name = $post->name;
         $post->delete();
 
         Activity::create([
             'user_id' => Auth::id(),
-            'message' => 'post ' . $post->name . ' deleted.'
+            'message' => 'Post ' . $post_name . ' deleted.'
         ]);
 
         return redirect(route('posts.index'))
-            ->with('message', 'post deleted.');
+            ->with('message', 'Post deleted.');
     }
 }

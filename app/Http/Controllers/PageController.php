@@ -146,7 +146,7 @@ class PageController extends Controller
 
         Activity::create([
             'user_id' => Auth::id(),
-            'message' => 'Page ' . $page->name . ' deleted.'
+            'message' => 'Page ' . $page_name . ' deleted.'
         ]);
 
         return redirect(route('pages.index'))
