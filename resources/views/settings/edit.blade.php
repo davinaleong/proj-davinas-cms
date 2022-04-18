@@ -44,7 +44,7 @@
                                 <td>
                                     <button type="button" class="btn btn-danger"
                                         onclick="this.parentNode.parentNode.remove();">
-                                        Remove
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -61,7 +61,8 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </td>
                             <td>
-                                <button id="addButton" type="button" class="btn btn-info">Add</button>
+                                <button id="addButton" type="button" class="btn btn-info"><i
+                                        class="fa fa-plus"></i></button>
                             </td>
                         </tr>
                     </tfoot>
@@ -114,7 +115,7 @@
             const newDeleteButton = document.createElement('button');
             newDeleteButton.setAttribute('type', 'button');
             newDeleteButton.setAttribute('class', 'btn btn-danger');
-            newDeleteButton.innerText = 'Remove';
+            newDeleteButton.innerHTML = '<i class="fa fa-trash"></i>';
             newDeleteButton.addEventListener('click', e => deleteRow(e.target));
 
             const newButtonTd = document.createElement('td');

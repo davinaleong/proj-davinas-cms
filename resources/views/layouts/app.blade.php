@@ -56,6 +56,9 @@
             </div>
         </div>
     </div>
+
+    @yield('delete-modal')
+
     <!-- plugin dependencies -->
     <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

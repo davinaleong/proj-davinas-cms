@@ -20,13 +20,13 @@
                 @csrf
                 <div class="position-relative mb-3">
                     <label for="input-name" class="form-label">Name</label>
-                    <input name="name" id="input-name" type="text" class="form-control text-lowercase"
-                        value="{{ old('name') }}" required>
+                    <input name="name" id="input-name" type="text" class="form-control" value="{{ old('name') }}"
+                        required>
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-title" class="form-label">Title</label>
-                    <input name="title" id="input-title" type="text" class="form-control text-lowercase"
-                        value="{{ old('title') }}" required>
+                    <input name="title" id="input-title" type="text" class="form-control" value="{{ old('title') }}"
+                        required>
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-subtitle" class="form-label">Subtitle</label>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-meta_title" class="form-label">Meta Title</label>
-                    <input name="meta_title" id="input-meta_title" type="text" class="form-control text-lowercase"
+                    <input name="meta_title" id="input-meta_title" type="text" class="form-control"
                         value="{{ old('meta_title') }}" required>
                 </div>
                 <div class="position-relative mb-3">

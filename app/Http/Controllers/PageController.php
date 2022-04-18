@@ -17,8 +17,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('page.index', [
-            'page' => Page::orderByDesc('created_at')
+        return view('pages.index', [
+            'pages' => Page::orderByDesc('created_at')
                 ->paginate(Setting::getListPerPage()),
         ]);
     }
@@ -30,7 +30,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('page.create', [
+        return view('pages.create', [
             'user_name' => Auth::user()->name
         ]);
     }
@@ -79,7 +79,7 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        return view('page.show', [
+        return view('pages.show', [
             'page' => $page
         ]);
     }
@@ -92,7 +92,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('page.edit', [
+        return view('pages.edit', [
             'page' => $page
         ]);
     }

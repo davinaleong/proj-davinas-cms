@@ -14,26 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->create([
             'name' => env('ROOT_NAME', 'John Doe'),
             'email' => env('ROOT_EMAIL', 'johndoe@example.com'),
             'password' => Hash::make(env('ROOT_PASSWORD', 'helloWorld'))
         ]);
         // \App\Models\Activity::factory(60)->create();
-        \App\Models\Setting::factory()->create([
-            'user_id' => 1,
+        \App\Models\Setting::factory()->for($user)->create([
             'name' => 'Items per page',
             'key' => \App\Models\Setting::$KEY_LIST_PER_PAGE,
             'value' => env(\App\Models\Setting::$KEY_LIST_PER_PAGE, 50)
         ]);
-        \App\Models\Setting::factory()->create([
-            'user_id' => 1,
+        \App\Models\Setting::factory()->for($user)->create([
             'name' => 'DB Datetime Format',
             'key' => \App\Models\Setting::$KEY_DB_DT_FORMAT,
             'value' => env(\App\Models\Setting::$KEY_DB_DT_FORMAT, 'Y-m-d H:i:s')
         ]);
-        \App\Models\Setting::factory()->create([
-            'user_id' => 1,
+        \App\Models\Setting::factory()->for($user)->create([
             'name' => 'System Datetime Format',
             'key' => \App\Models\Setting::$KEY_SYSTEM_DT_FORMAT,
             'value' => env(\App\Models\Setting::$KEY_SYSTEM_DT_FORMAT, 'd M Y H:i:s')

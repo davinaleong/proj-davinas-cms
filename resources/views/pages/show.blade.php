@@ -11,6 +11,17 @@
 
 @section('page-title', 'Pages')
 
+@section('page-actions')
+    <div class="page-title-actions">
+        <a href="{{ route('pages.edit', ['page' => $page]) }}" class="btn btn-info btn-shadow mr-2">
+            <i class="fa fa-pen"></i> Edit
+        </a>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="fa fa-trash"></i> Delete
+        </button>
+    </div>
+@endsection
+
 @section('content')
     <div class="main-card mb-3 card">
         <div class="card-body">
@@ -48,13 +59,36 @@
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-created_at" class="col-sm-2 col-form-label">Created At</label>
-                    <textarea name="created_at" readonly class="form-control-plaintext" id="input-created_at" class="form-control"
-                        rows="4">{{ $page->getCreatedAt() }}</textarea>
+                    <input type="text" readonly class="form-control-plaintext" id="input-created_at"
+                        value="{{ $page->getCreatedAt() }}">
                 </div>
                 <div class="position-relative mb-3">
                     <label for="input-updated_at" class="col-sm-2 col-form-label">Updated At</label>
-                    <textarea name="updated_at" readonly class="form-control-plaintext" id="input-updated_at" class="form-control"
-                        rows="4">{{ $page->getUpdatedAt() }}</textarea>
+                    <input type="text" readonly class="form-control-plaintext" id="input-updated_at"
+                        value="{{ $page->getUpdatedAt() }}">
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@section('delete-modal')
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="{{ route('pages.destroy', ['page' => $page]) }}" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Page</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    @method('DELETE')
+                    <p>Are you sure?<br>This action CANNOT be undone!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-ban"></i>
+                        Close</button>
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
                 </div>
             </form>
         </div>
