@@ -67,11 +67,11 @@ class PostControllerTest extends TestCase
             ->post('cms/posts', [
                 'name' => $post->name,
                 'title' => $post->title,
-                'subtitle' => $post->subtitle,
+                //'subtitle' => $post->subtitle,
                 'text' => $post->text,
                 'featured' => $post->featured,
                 'meta_title' => $post->meta_title,
-                'meta_description' => $post->meta_description,
+                //'meta_description' => $post->meta_description,
                 'featured' => (int) $post->featured,
                 'published_at' => $post->published_at
             ]);
@@ -84,11 +84,11 @@ class PostControllerTest extends TestCase
             'name' => $post->name,
             'slug' => $post->slug,
             'title' => $post->title,
-            'subtitle' => $post->subtitle,
+            //'subtitle' => $post->subtitle,
             'text' => $post->text,
             'featured' => (int) $post->featured,
             'meta_title' => $post->meta_title,
-            'meta_description' => $post->meta_description,
+            //'meta_description' => $post->meta_description,
             'published_at' => $post->published_at,
         ]);
 
@@ -109,7 +109,7 @@ class PostControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle', 'meta_title', 'meta_description', 'published_at'
+            'name', 'title', 'meta_title', 'published_at'
         ]);
     }
 
@@ -165,11 +165,11 @@ class PostControllerTest extends TestCase
             ->patch('cms/posts/' . $post->id, [
                 'name' => $edited_post->name,
                 'title' => $edited_post->title,
-                'subtitle' => $edited_post->subtitle,
+                //'subtitle' => $edited_post->subtitle,
                 'text' => $edited_post->text,
                 'featured' => $edited_post->featured,
                 'meta_title' => $edited_post->meta_title,
-                'meta_description' => $edited_post->meta_description,
+                //'meta_description' => $edited_post->meta_description,
                 'featured' => (int) $post->featured,
                 'published_at' => $edited_post->published_at,
             ]);
@@ -183,10 +183,10 @@ class PostControllerTest extends TestCase
             'name' => $edited_post->name,
             'slug' => $edited_post->slug,
             'title' => $edited_post->title,
-            'subtitle' => $edited_post->subtitle,
+            //'subtitle' => $edited_post->subtitle,
             'text' => $edited_post->text,
             'meta_title' => $edited_post->meta_title,
-            'meta_description' => $edited_post->meta_description,
+            //'meta_description' => $edited_post->meta_description,
         ]);
 
         $this->assertDatabaseHas('activities', [
@@ -207,7 +207,7 @@ class PostControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors([
-            'name', 'title', 'subtitle', 'meta_title', 'meta_description', 'published_at'
+            'name', 'title', 'meta_title', 'published_at'
         ]);
     }
 

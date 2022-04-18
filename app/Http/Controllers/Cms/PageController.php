@@ -47,9 +47,9 @@ class PageController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'subtitle' => 'nullable|string',
             'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string',
+            'meta_description' => 'nullable|string',
         ]);
 
         $page = Page::create([
@@ -110,9 +110,9 @@ class PageController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'subtitle' => 'nullable|string',
             'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string',
+            'meta_description' => 'nullable|string',
         ]);
 
         $page->user_id = Auth::id();
