@@ -14,18 +14,16 @@ type Query {
     posts(
         "Filters by featured property."
         featured: Boolean
-        "Filters by year the post is under."
-        folder: String
         "Filter a single post by the slug"
         slug: String
     ): [Post!]!
         @paginate(defaultCount: 10)
         @orderBy(column: "published_at", direction: DESC)
 
-    "Gets a list of folders."
-    folders(name: String): [Folder!]!
-        @paginate(defaultCount: 10)
-        @orderBy(column: "name", direction: ASC)
+    # "Gets a list of folders."
+    # folders(name: String): [Folder!]!
+    #     @paginate(defaultCount: 10)
+    #     @orderBy(column: "name", direction: ASC)
 }
 
 "A page of the blog."
@@ -66,17 +64,16 @@ type Post {
     metaDescription: String
     "The date the post was published."
     publishedAt: DateTime
+    # "The post's folder"
+    # folder: Folder! @belongsTo
 }
 
-"The archive folder the posts are in."
-type Folder {
-    "Unique primary key."
-    id: ID!
-    "Folder's name. Used for filters."
-    name: String!
-    "Posts that belong to the folder."
-    posts: [Post!]!
-        @hasMany
-        @paginate(defaultCount: 10)
-        @orderBy(column: "published_at", direction: DESC)
-}
+# "The archive folder the posts are in."
+# type Folder {
+#     "Unique primary key."
+#     id: ID!
+#     "Folder's name. Used for filters."
+#     name: String!
+#     "Posts that belong to the folder."
+#     posts: [Post!]! @hasMany
+# }
