@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Models\Folder;
 use App\Models\Setting;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -60,8 +63,18 @@ class PostController extends Controller
         $name = $request->input('name');
         $text = $request->input('text');
 
+        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'));
+
+        $folder = Folder::where('name', $year)->first();
+        if (!$folder) {
+            $folder = Folder::create([
+                'name' => $year
+            ]);
+        }
+
         $post = Post::create([
             'user_id' => Auth::id(),
+            'folder_id' => $folder->id,
             'name' => $name,
             'slug' => Post::generateSlug($name),
             'title' => $request->input('title'),
@@ -140,7 +153,17 @@ class PostController extends Controller
         $name = $request->input('name');
         $text = $request->input('text');
 
+        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'));
+
+        $folder = Folder::where('name', $year)->first();
+        if (!$folder) {
+            $folder = Folder::create([
+                'name' => $year
+            ]);
+        }
+
         $post->user_id = Auth::id();
+        $post->folder_id = $folder->id;
         $post->name = $name;
         $post->slug = Post::generateSlug($name);
         $post->title = $request->input('title');

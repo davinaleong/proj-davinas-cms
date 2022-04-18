@@ -1,0 +1,79 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Gets a page."
+    pages(
+        "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+        name: String @where(operator: "like")
+    ): [Page!]! @paginate(defaultCount: 1)
+
+    "Gets a list of posts."
+    posts(
+        "Filters by featured property."
+        featured: Boolean
+        "Filters by year the post is under."
+        folder: String
+        "Filter a single post by the slug"
+        slug: String
+    ): [Post!]!
+        @paginate(defaultCount: 10)
+        @orderBy(column: "published_at", direction: DESC)
+
+    "Gets a list of folders."
+    folders(name: String): [Folder!]!
+        @paginate(defaultCount: 10)
+        @orderBy(column: "name", direction: ASC)
+}
+
+"A page of the blog."
+type Page {
+    "Unique primary key."
+    id: ID!
+    "Name of the page. Used for filters"
+    name: String!
+    "Title of the page."
+    title: String!
+    "Subtitle of the page."
+    subtitle: String
+    "Head title of page."
+    metaTitle: String
+    "Head description of page."
+    metaDescription: String
+}
+
+"A blog post."
+type Post {
+    "Unique primary key."
+    id: ID!
+    "Post's name. Used for filters."
+    name: String!
+    "Post's slug. Used for filters."
+    slug: String!
+    "Post's title."
+    title: String!
+    "Post's subtitle."
+    subtitle: String
+    "Post's short description."
+    summary: String
+    "Post's content."
+    text: String
+    "Post's head title."
+    metaTitle: String
+    "Post's head description."
+    metaDescription: String
+    "The date the post was published."
+    publishedAt: DateTime
+}
+
+"The archive folder the posts are in."
+type Folder {
+    "Unique primary key."
+    id: ID!
+    "Folder's name. Used for filters."
+    name: String!
+    "Posts that belong to the folder."
+    posts: [Post!]! @hasMany
+}
