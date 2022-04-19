@@ -48,6 +48,7 @@ class PageController extends Controller
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string',
+            'text' => 'nullable|string',
             'meta_title' => 'required|string|max:255',
             'meta_description' => 'nullable|string',
         ]);
@@ -57,6 +58,7 @@ class PageController extends Controller
             'name' => $request->input('name'),
             'title' => $request->input('title'),
             'subtitle' => $request->input('subtitle'),
+            'text' => $request->input('text'),
             'meta_title' => $request->input('meta_title'),
             'meta_description' => $request->input('meta_description'),
         ]);
@@ -111,6 +113,7 @@ class PageController extends Controller
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string',
+            'text' => 'nullable|string',
             'meta_title' => 'required|string|max:255',
             'meta_description' => 'nullable|string',
         ]);
@@ -119,6 +122,7 @@ class PageController extends Controller
         $page->name = $request->input('name');
         $page->title = $request->input('title');
         $page->subtitle = $request->input('subtitle');
+        $page->text = $request->input('text');
         $page->meta_title = $request->input('meta_title');
         $page->meta_description = $request->input('meta_description');
         $page->save();
