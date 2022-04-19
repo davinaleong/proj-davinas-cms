@@ -18,15 +18,15 @@
             <h5 class="card-title">Edit Page</h5>
 
             <form id="form" class="row" method="POST" action="{{ route('pages.update', ['page' => $page]) }}">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                     <div class="position-relative mb-3">
                         <label for="input-text" class="form-label">Text</label>
                         <input type="hidden" name="text" id="input-text">
-                        <div id="editor">{{ old('text') ? old('text') : $page->text }}</div>
+                        <div id="editor"></div>
                     </div>
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <div class="position-relative mb-3">
                         <label for="input-creator" class="col-sm-2 col-form-label">Creator</label>
                         <input type="text" readonly class="form-control-plaintext" id="input-creator"
@@ -92,7 +92,8 @@
             el: document.querySelector('#editor'),
             height: '500px',
             initialEditType: 'markdown',
-            previewStyle: 'vertical'
+            previewStyle: 'vertical',
+            initialValue: `{{ old('text') ? old('text') : $page->text }}`
         });
 
         editor.getMarkdown();
