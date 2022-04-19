@@ -15,11 +15,18 @@ class Post extends Base
 
     public static function generateSlug($name)
     {
+        if (empty($name)) {
+            return '';
+        }
         return Str::slug($name);
     }
 
     public static function generateSummary($text)
     {
+        if (empty($text)) {
+            return '';
+        }
+
         return Str::words(strip_tags(Str::markdown($text)), 50, '...');
     }
 

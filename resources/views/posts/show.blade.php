@@ -31,7 +31,7 @@
                 <div class="col-sm-8">
                     <div class="position-relative mb-3">
                         <label for="input-text" class="form-label">Text</label>
-                        <div>{!! \Illuminate\Support\Str::markdown($post->text) !!}</div>
+                        <div>{!! $post->text ? \Illuminate\Support\Str::markdown($post->text) : '' !!}</div>
                     </div>
                 </div>
                 <div class="col-sm-4">
