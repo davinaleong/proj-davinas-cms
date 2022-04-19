@@ -17,15 +17,15 @@
         <div class="card-body">
             <h5 class="card-title">Edit Post</h5>
 
-            <form class="row" method="POST" action="{{ route('posts.update', ['post' => $post]) }}">
-                <div class="col-sm-8">
+            <form id="form" class="row" method="POST" action="{{ route('posts.update', ['post' => $post]) }}">
+                <div class="col-sm-12">
                     <div class="position-relative mb-3">
                         <label for="input-text" class="form-label">Text</label>
-                        <textarea name="text" id="input-text" class="form-control"
-                            rows="4">{{ old('text') ? old('text') : $post->text }}</textarea>
+                        <input type="hidden" name="text" id="input-text">
+                        <div id="editor"></div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <div class="position-relative mb-3">
                         <label for="input-creator" class="col-form-label">Creator</label>
                         <input type="text" readonly class="form-control-plaintext" id="input-creator"
@@ -100,11 +100,27 @@
     </div>
 @endsection
 
+@section('styles')
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+@endsection
+
 @section('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector("#input-text"))
-            .catch(error => console.error("CKEditor Error: ", error))
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '500px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical',
+            initialValue: `{{ old('text') ? old('text') : $post->text }}`
+        });
+
+        editor.getMarkdown();
+
+        document.querySelector('#form').addEventListener('submit', e => {
+            e.preventDefault();
+            document.querySelector('#input-text').value = editor.getMarkdown();
+            e.target.submit();
+        });
     </script>
 @endsection
