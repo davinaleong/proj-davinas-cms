@@ -92,9 +92,7 @@
                 <div class="col-sm-12">
                     @csrf
                     @method('PATCH')
-
                     @include('components.errors')
-
                     <button type="submit" class="mt-1 btn btn-primary">Submit</button>
                 </div>
             </form>

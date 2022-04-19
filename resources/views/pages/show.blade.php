@@ -27,45 +27,54 @@
         <div class="card-body">
             <h5 class="card-title">View Page</h5>
 
-            <form class="">
-                <div class="position-relative mb-3">
-                    <label for="input-creator" class="col-sm-2 col-form-label">Creator</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-creator"
-                        value="{{ $page->getUserName() }}">
+            <form class="row">
+                <div class="col-sm-8">
+                    <div class="position-relative mb-3">
+                        <label for="input-text" class="form-label">Text</label>
+                        <div>{!! $page->text !!}</div>
+                    </div>
                 </div>
-                <div class="position-relative mb-3">
-                    <label for="input-name" class="col-sm-2 col-form-label">Name</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-name" value="{{ $page->name }}">
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-title" class="col-sm-2 col-form-label">Title</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-title"
-                        value="{{ $page->title }}">
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-subtitle" class="col-sm-2 col-form-label">Subtitle</label>
-                    <textarea name="subtitle" readonly class="form-control-plaintext" id="input-subtitle" class="form-control"
-                        rows="4">{{ $page->subtitle }}</textarea>
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-meta_title" class="col-sm-2 col-form-label">Meta Title</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-meta_title"
-                        value="{{ $page->meta_title }}">
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-meta_description" class="col-sm-2 col-form-label">Meta Description</label>
-                    <textarea name="meta_description" readonly class="form-control-plaintext" id="input-meta_description"
-                        class="form-control" rows="4">{{ $page->meta_description }}</textarea>
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-created_at" class="col-sm-2 col-form-label">Created At</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-created_at"
-                        value="{{ $page->getCreatedAt() }}">
-                </div>
-                <div class="position-relative mb-3">
-                    <label for="input-updated_at" class="col-sm-2 col-form-label">Updated At</label>
-                    <input type="text" readonly class="form-control-plaintext" id="input-updated_at"
-                        value="{{ $page->getUpdatedAt() }}">
+                <div class="col-sm-4">
+                    <div class="position-relative mb-3">
+                        <label for="input-creator" class="col-form-label">Creator</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-creator"
+                            value="{{ $page->getUserName() }}">
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-name" class="col-form-label">Name</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-name"
+                            value="{{ $page->name }}">
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-title" class="col-form-label">Title</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-title"
+                            value="{{ $page->title }}">
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-subtitle" class="col-form-label">Subtitle</label>
+                        <textarea name="subtitle" readonly class="form-control-plaintext" id="input-subtitle" class="form-control"
+                            rows="4">{{ $page->subtitle }}</textarea>
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-meta_title" class="col-form-label">Meta Title</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-meta_title"
+                            value="{{ $page->meta_title }}">
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-meta_description" class="col-form-label">Meta Description</label>
+                        <textarea name="meta_description" readonly class="form-control-plaintext" id="input-meta_description"
+                            class="form-control" rows="4">{{ $page->meta_description }}</textarea>
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-created_at" class="col-form-label">Created At</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-created_at"
+                            value="{{ $page->getCreatedAt() }}">
+                    </div>
+                    <div class="position-relative mb-3">
+                        <label for="input-updated_at" class="col-form-label">Updated At</label>
+                        <input type="text" readonly class="form-control-plaintext" id="input-updated_at"
+                            value="{{ $page->getUpdatedAt() }}">
+                    </div>
                 </div>
             </form>
         </div>
