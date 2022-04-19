@@ -44,8 +44,8 @@
                     </div>
                     <div class="position-relative mb-3">
                         <label for="input-subtitle" class="form-label">Subtitle</label>
-                        <textarea name="subtitle" id="input-subtitle" class="form-control" rows="4"
-                            required>{{ old('subtitle') ? old('subtitle') : $page->subtitle }}</textarea>
+                        <textarea name="subtitle" id="input-subtitle" class="form-control"
+                            rows="4">{{ old('subtitle') ? old('subtitle') : $page->subtitle }}</textarea>
                     </div>
                     <div class="position-relative mb-3">
                         <label for="input-meta_title" class="form-label">Meta Title</label>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="position-relative mb-3">
                         <label for="input-meta_description" class="form-label">Meta Description</label>
-                        <textarea name="meta_description" id="input-meta_description" class="form-control" rows="2"
-                            required>{{ old('meta_description') ? old('meta_description') : $page->meta_description }}</textarea>
+                        <textarea name="meta_description" id="input-meta_description" class="form-control"
+                            rows="2">{{ old('meta_description') ? old('meta_description') : $page->meta_description }}</textarea>
                     </div>
 
                     <div class="position-relative mb-3">
