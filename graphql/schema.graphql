@@ -2,6 +2,9 @@
 scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
 "Indicates what fields are available at the top level of a query operation."
 type Query {
     "Gets a page."
@@ -19,11 +22,6 @@ type Query {
     ): [Post!]!
         @paginate(defaultCount: 10)
         @orderBy(column: "published_at", direction: DESC)
-
-    # "Gets a list of folders."
-    # folders(name: String): [Folder!]!
-    #     @paginate(defaultCount: 10)
-    #     @orderBy(column: "name", direction: ASC)
 }
 
 "A page of the blog."
@@ -60,22 +58,12 @@ type Post {
     summary: String
     "Post's content."
     text: String
+    "Marks a featured post."
+    featured: Boolean
     "Post's head title."
     meta_title: String
     "Post's head description."
     meta_description: String
     "The date the post was published."
-    published_at: DateTime
-    # "The post's folder"
-    # folder: Folder! @belongsTo
+    published_at: Date
 }
-
-# "The archive folder the posts are in."
-# type Folder {
-#     "Unique primary key."
-#     id: ID!
-#     "Folder's name. Used for filters."
-#     name: String!
-#     "Posts that belong to the folder."
-#     posts: [Post!]! @hasMany
-# }
