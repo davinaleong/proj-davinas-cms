@@ -56,7 +56,8 @@
                     </div>
                     <div class="position-relative form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" id="input-featured" class="form-check-input" value="1"> Featured
+                            <input type="checkbox" name="featured" id="input-featured" class="form-check-input" value="1">
+                            Featured
                         </label>
                     </div>
                 </div>

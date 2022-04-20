@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
-                        <tr>
+                        <tr @if ($post->featured) class="table-info" @endif>
                             <td>{{ $post->getUserName() }}</td>
                             <td>{{ $post->name }}</td>
                             <td>{{ $post->title }}</td>
