@@ -36,6 +36,8 @@ type Page {
     title: String!
     "Subtitle of the page."
     subtitle: String
+    "Pages's content."
+    text: String
     "Head title of page."
     metaTitle: String
     "Head description of page."
