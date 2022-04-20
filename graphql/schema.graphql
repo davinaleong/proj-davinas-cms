@@ -39,9 +39,9 @@ type Page {
     "Pages's content."
     text: String
     "Head title of page."
-    metaTitle: String
+    meta_title: String
     "Head description of page."
-    metaDescription: String
+    meta_description: String
 }
 
 "A blog post."
@@ -61,11 +61,11 @@ type Post {
     "Post's content."
     text: String
     "Post's head title."
-    metaTitle: String
+    meta_title: String
     "Post's head description."
-    metaDescription: String
+    meta_description: String
     "The date the post was published."
-    publishedAt: DateTime
+    published_at: DateTime
     # "The post's folder"
     # folder: Folder! @belongsTo
 }
