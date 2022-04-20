@@ -16,9 +16,9 @@ type Query {
     "Gets a list of posts."
     posts(
         "Filters by featured property."
-        featured: Boolean
+        featured: Boolean @eq
         "Filter a single post by the slug"
-        slug: String
+        slug: String @where(operator: "like")
     ): [Post!]!
         @paginate(defaultCount: 10)
         @orderBy(column: "published_at", direction: DESC)
