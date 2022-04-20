@@ -88,7 +88,7 @@ class PostController extends Controller
         ]);
 
         if ($featured) {
-            Post::whereNot('id', $post->id)->update(['featured' => false]);
+            Post::where('id', '!=', $post->id)->update(['featured' => false]);
         }
 
         Activity::create([
@@ -177,7 +177,7 @@ class PostController extends Controller
         $post->save();
 
         if ($featured) {
-            Post::whereNot('id', $post->id)->update(['featured' => false]);
+            Post::where('id', '!=', $post->id)->update(['featured' => false]);
         }
 
         Activity::create([
