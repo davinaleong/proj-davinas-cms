@@ -63,7 +63,7 @@ class PostController extends Controller
         $name = $request->input('name');
         $text = $request->input('text');
 
-        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'));
+        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'))->format(Setting::getYearFormat());
 
         $folder = Folder::where('name', $year)->first();
         if (!$folder) {
@@ -153,7 +153,7 @@ class PostController extends Controller
         $name = $request->input('name');
         $text = $request->input('text');
 
-        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'));
+        $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'))->format(Setting::getYearFormat());
 
         $folder = Folder::where('name', $year)->first();
         if (!$folder) {
