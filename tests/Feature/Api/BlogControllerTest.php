@@ -12,6 +12,8 @@ use Tests\TestCase;
 /** @group new */
 class BlogControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_can_access_index()
     {
         /*
@@ -27,9 +29,9 @@ class BlogControllerTest extends TestCase
         $posts[0]->featured = true;
         $posts[0]->save();
 
-        $this->get('api/blog/')
+        $this->get('/api/blog/')
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'page',
                 'featured',
                 'latest'
@@ -49,9 +51,9 @@ class BlogControllerTest extends TestCase
             'featured' => true
         ]);
 
-        $this->get('api/blog/about/')
+        $this->get('/api/blog/about/')
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'page',
                 'latest'
             ]);
@@ -73,9 +75,9 @@ class BlogControllerTest extends TestCase
             'featured' => true
         ]);
 
-        $this->get('api/blog/archive')
+        $this->get('/api/blog/archive')
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'page',
                 'featured',
                 'latest',
@@ -104,9 +106,9 @@ class BlogControllerTest extends TestCase
         $post->featured = true;
         $post->save();
 
-        $this->get('api/blog/about/')
+        $this->get('/api/blog/archive/' . $folders[0]->name)
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'page',
                 'featured',
                 'latest',
@@ -124,9 +126,9 @@ class BlogControllerTest extends TestCase
         */
         $post = Post::factory()->create();
 
-        $this->get('api/blog/post/' . $post->slug)
+        $this->get('/api/blog/posts/' . $post->slug)
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'latest',
                 'posts'
             ]);
@@ -145,9 +147,9 @@ class BlogControllerTest extends TestCase
             'featured' => true
         ]);
 
-        $this->get('api/blog/contact/')
+        $this->get('/api/blog/contact/')
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'page',
                 'latest'
             ]);
