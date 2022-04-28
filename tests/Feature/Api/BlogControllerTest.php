@@ -52,12 +52,6 @@ class BlogControllerTest extends TestCase
 
     public function test_can_access_archive_folder()
     {
-        /*
-            - archive page
-            - featured post
-            - latest 1 post
-            - all folders
-        */
         Page::factory()->create([
             'name' => 'Archive'
         ]);
