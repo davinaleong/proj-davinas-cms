@@ -16,11 +16,6 @@ class BlogControllerTest extends TestCase
 
     public function test_can_access_index()
     {
-        /*
-            - index page
-            - featured post
-            - latest 6 posts
-        */
         Page::factory()->create([
             'name' => 'Index'
         ]);
@@ -31,7 +26,7 @@ class BlogControllerTest extends TestCase
 
         $this->get('/api/blog/')
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'page',
                 'featured',
                 'latest'
@@ -40,10 +35,6 @@ class BlogControllerTest extends TestCase
 
     public function test_can_access_about()
     {
-        /*
-            - about page
-            - latest 1 post
-        */
         Page::factory()->create([
             'name' => 'About'
         ]);
@@ -53,7 +44,7 @@ class BlogControllerTest extends TestCase
 
         $this->get('/api/blog/about/')
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'page',
                 'latest'
             ]);
@@ -77,7 +68,7 @@ class BlogControllerTest extends TestCase
 
         $this->get('/api/blog/archive')
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'page',
                 'featured',
                 'latest',
@@ -108,7 +99,7 @@ class BlogControllerTest extends TestCase
 
         $this->get('/api/blog/archive/' . $folders[0]->name)
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'page',
                 'featured',
                 'latest',
@@ -120,15 +111,11 @@ class BlogControllerTest extends TestCase
 
     public function test_can_access_post()
     {
-        /*
-            - latest 1 post
-            - post by slug
-        */
         $post = Post::factory()->create();
 
         $this->get('/api/blog/posts/' . $post->slug)
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'latest',
                 'posts'
             ]);
@@ -136,10 +123,6 @@ class BlogControllerTest extends TestCase
 
     public function test_can_access_contact()
     {
-        /*
-            - contact page
-            - latest 1 post
-        */
         Page::factory()->create([
             'name' => 'Contact'
         ]);
@@ -149,7 +132,7 @@ class BlogControllerTest extends TestCase
 
         $this->get('/api/blog/contact/')
             ->assertOk()
-            ->assertJson([
+            ->assertJsonStructure([
                 'page',
                 'latest'
             ]);
