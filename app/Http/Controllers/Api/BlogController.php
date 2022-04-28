@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Folder;
 use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -22,7 +23,24 @@ class BlogController extends Controller
         return $this->common("About", 1);
     }
 
-    public function archive(string $year)
+    public function archiveFolder()
+    {
+        $featured_post = Post::where('featured', true)
+            ->first();
+        $folders = Folder::orderByDesc('name')
+            ->get();
+
+        $data = [
+            'featured' => $featured_post,
+            'folders' => $folders
+        ];
+
+        $common_data = $this->common('Archive', 1);
+        $data = array_merge($data, $common_data);
+        return $data;
+    }
+
+    public function archiveList(string $year)
     {
         //
     }
