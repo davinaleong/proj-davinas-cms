@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PageResource;
 use App\Models\Folder;
 use App\Models\Page;
 use App\Models\Post;
@@ -93,7 +94,7 @@ class BlogController extends Controller
             ->get();
 
         return [
-            'page' => $page_data,
+            'page' => new PageResource($page_data),
             'latest' => $latest_posts
         ];
     }
