@@ -32,7 +32,7 @@ class BlogController extends Controller
 
         $featured_post = Post::where('featured', true)
             ->first();
-        $folders = Folder::orderByDesc('name')
+        $folders = Folder::whereRaw('LENGTH(`name`) <= 4')->orderByDesc('name')
             ->get();
 
         $data = [
