@@ -43,4 +43,14 @@ class Post extends Base
             return '';
         }
     }
+
+    public function folder()
+    {
+        return $this->belongsTo('App\Models\Folder');
+    }
+
+    public function getFolderName()
+    {
+        return $this->folder ? $this->folder->name : '';
+    }
 }

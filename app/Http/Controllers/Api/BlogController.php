@@ -42,7 +42,27 @@ class BlogController extends Controller
 
     public function archiveList(string $year)
     {
-        //
+        $common_data = $this->common('archive', 1);
+
+        $featured_post = Post::where('featured', true)
+            ->first();
+        $folders = Folder::whereRaw("LOWER(name) LIKE LOWER('%$year%')")
+            ->take(1)
+            ->get();
+        $posts = [];
+        if ($folders->count() > 0) {
+            $posts = Post::where('folder_id', $folders[0]->id)
+                ->paginate(20);
+        }
+
+        $data = [
+            'featured' => $featured_post,
+            'folders' => $folders,
+            'posts' => $posts
+        ];
+        $data = array_merge($data, $common_data);
+
+        return $data;
     }
 
     public function posts(string $slug)
