@@ -13,6 +13,10 @@ class Post extends Base
     use HasFactory;
     use SoftDeletes;
 
+    protected $hidden = [
+        'id', 'user_id', 'folder_id', 'created_at', 'updated_at', 'deleted_at'
+    ];
+
     public static function generateSlug($name)
     {
         if (empty($name)) {

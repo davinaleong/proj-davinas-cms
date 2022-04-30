@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PageResource;
 use App\Models\Folder;
 use App\Models\Page;
 use App\Models\Post;
@@ -13,19 +12,24 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $data = $this->common("Index", 6);
+        $common_data = $this->common('Index', 6);
         $featured_post = Post::where('featured', true)->first();
-        $data = array_merge($data, ['featured' => $featured_post]);
+
+        $data = ['featured' => $featured_post];
+        $data = array_merge($data, $common_data);
+
         return $data;
     }
 
     public function about()
     {
-        return $this->common("About", 1);
+        return $this->common('About', 1);
     }
 
     public function archiveFolder()
     {
+        $common_data = $this->common('archive', 1);
+
         $featured_post = Post::where('featured', true)
             ->first();
         $folders = Folder::orderByDesc('name')
@@ -36,7 +40,6 @@ class BlogController extends Controller
             'folders' => $folders
         ];
 
-        $common_data = $this->common('Archive', 1);
         $data = array_merge($data, $common_data);
         return $data;
     }
@@ -68,7 +71,7 @@ class BlogController extends Controller
 
     public function posts(string $slug)
     {
-        $common_data = $this->common("Post", 1);
+        $common_data = $this->common('post', 1);
         $posts = [];
 
         if ($slug) {
@@ -83,7 +86,7 @@ class BlogController extends Controller
 
     public function contact()
     {
-        return $this->common("Contact", 1);
+        return $this->common('contact', 1);
     }
 
     private function common($page_name, $latest_count)
@@ -94,7 +97,7 @@ class BlogController extends Controller
             ->get();
 
         return [
-            'page' => new PageResource($page_data),
+            'page' => $page_data,
             'latest' => $latest_posts
         ];
     }

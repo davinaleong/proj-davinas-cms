@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-/** @group new */
 class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -27,14 +26,7 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/');
         $response->assertOk();
         $response->assertJsonStructure([
-            'page' => [
-                'name',
-                'title',
-                'subtitle',
-                'text',
-                'meta_title',
-                'meta_description'
-            ],
+            'page',
             'featured',
             'latest'
         ]);
@@ -52,14 +44,7 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/about/');
         $response->assertOk();
         $response->assertJsonStructure([
-            'page' => [
-                'name',
-                'title',
-                'subtitle',
-                'text',
-                'meta_title',
-                'meta_description'
-            ],
+            'page',
             'latest'
         ]);
     }
@@ -74,17 +59,10 @@ class BlogControllerTest extends TestCase
             'featured' => true
         ]);
 
-        $response = $this->get('/api/blog/archive');
+        $response = $this->get('/api/blog/archive-folder');
         $response->assertOk();
         $response->assertJsonStructure([
-            'page' => [
-                'name',
-                'title',
-                'subtitle',
-                'text',
-                'meta_title',
-                'meta_description'
-            ],
+            'page',
             'featured',
             'latest',
             'folders'
@@ -102,23 +80,14 @@ class BlogControllerTest extends TestCase
         $post->featured = true;
         $post->save();
 
-        $response = $this->get('/api/blog/archive/' . $post->getFolderName());
+        $response = $this->get('/api/blog/archive-list/' . $post->getFolderName());
         $response->assertOk();
         $response->assertJsonStructure([
-            'page' => [
-                'name',
-                'title',
-                'subtitle',
-                'text',
-                'meta_title',
-                'meta_description'
-            ],
+            'page',
             'featured',
             'folders',
             'latest',
-            'posts' => [
-                'data'
-            ]
+            'posts'
         ]);
     }
 
@@ -146,14 +115,7 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/contact/');
         $response->assertOk();
         $response->assertJsonStructure([
-            'page' => [
-                'name',
-                'title',
-                'subtitle',
-                'text',
-                'meta_title',
-                'meta_description'
-            ],
+            'page',
             'latest'
         ]);
     }
