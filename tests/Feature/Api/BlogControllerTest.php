@@ -17,7 +17,7 @@ class BlogControllerTest extends TestCase
     public function test_can_access_index()
     {
         Page::factory()->create([
-            'name' => 'Index'
+            'name' => 'index'
         ]);
         $posts = Post::factory()->count(6)->create();
 
@@ -36,7 +36,7 @@ class BlogControllerTest extends TestCase
     public function test_can_access_about()
     {
         Page::factory()->create([
-            'name' => 'About'
+            'name' => 'about'
         ]);
         Post::factory()->create([
             'featured' => true
@@ -53,7 +53,7 @@ class BlogControllerTest extends TestCase
     public function test_can_access_archive_folder()
     {
         Page::factory()->create([
-            'name' => 'Archive'
+            'name' => 'archive'
         ]);
         Folder::factory()->count(4)->create();
         Post::factory()->create([
@@ -79,7 +79,7 @@ class BlogControllerTest extends TestCase
             - latests 20 posts by folder id
         */
         Page::factory()->create([
-            'name' => 'Archive'
+            'name' => 'archive'
         ]);
         $folders = Folder::factory()->count(2)->create();
 
@@ -118,7 +118,7 @@ class BlogControllerTest extends TestCase
     public function test_can_access_contact()
     {
         Page::factory()->create([
-            'name' => 'Contact'
+            'name' => 'contact'
         ]);
         Post::factory()->create([
             'featured' => true

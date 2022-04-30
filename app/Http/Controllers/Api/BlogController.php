@@ -67,7 +67,7 @@ class BlogController extends Controller
 
     private function common($page_name, $latest_count)
     {
-        $page_data = Page::where('name', $page_name)->first();
+        $page_data = Page::whereRaw("LOWER(name) LIKE LOWER('%$page_name%')")->first();
         $latest_posts = Post::orderByDesc('published_at')
             ->take($latest_count)
             ->get();
