@@ -13,6 +13,10 @@ class Post extends Base
     use HasFactory;
     use SoftDeletes;
 
+    protected $hidden = [
+        'id', 'user_id', 'folder_id', 'created_at', 'updated_at', 'deleted_at'
+    ];
+
     public static function generateSlug($name)
     {
         if (empty($name)) {
@@ -42,5 +46,15 @@ class Post extends Base
         } else {
             return '';
         }
+    }
+
+    public function folder()
+    {
+        return $this->belongsTo('App\Models\Folder');
+    }
+
+    public function getFolderName()
+    {
+        return $this->folder ? $this->folder->name : '';
     }
 }
