@@ -37,7 +37,7 @@ class FixController extends Controller
     {
         $sql = "YEAR(`published_at`)";
         if (env('DB_CONNECTION') == 'pgsql') {
-            $sql = "date_part('year', `published_at`)";
+            $sql = "EXTRACT(YEAR FROM TIMESTAMP, published_at)";
         }
         
         DB::statement("UPDATE `posts` SET `year` = $sql WHERE `user_id` = 1");
