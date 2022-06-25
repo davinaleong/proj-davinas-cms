@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers\Api\Blog;
+
+use App\Models\Post;
+use App\Models\ApiStatus;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class FixController extends Controller
+{
+    public function postsFeatured(Request $request)
+    {
+        $request->validate([
+            'featured' => 'required|boolean'
+        ]);
+
+        $updateCount = Post::where('name', '!=', '')
+            ->update(['featured' => $request->input('featured')]);
+
+        $data = [
+            'status' => ApiStatus::$STATUS_FAILED,
+            'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_FAILED
+        ];
+        
+        if ($updateCount) {
+            $data = [
+                'status' => ApiStatus::$STATUS_SUCCESS,
+                'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_SUCCESS
+            ];
+        }
+        return response()->json($data);
+    }
+}

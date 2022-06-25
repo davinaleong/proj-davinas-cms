@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature\Api\Blog;
 
 use App\Models\Folder;
 use App\Models\Page;
@@ -9,21 +9,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-/** @group new */
 class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function test_can_access_csrf()
-    {
-        $response = $this->get('api/blog/csrf');
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'status',
-            'message',
-            'csrf'
-        ]);
-    }
 
     public function test_can_access_index()
     {
@@ -123,25 +111,6 @@ class BlogControllerTest extends TestCase
             'latest',
             'posts'
         ]);
-    }
-
-    public function test_can_access_fix_featured_posts()
-    {
-        Post::factory()->count(50)->create([
-            'featured' => true
-        ]);
-        $this->assertTrue(Post::where('featured', true)->count() > 0);
-
-        $response = $this->post('/api/blog/posts-featured', [
-            'featured' => false
-        ]);
-        $response->assertOk();
-        $response->assertJson([
-            'status' => 'SUCCESS',
-            'message' => 'Featured posts fixed.'
-        ]);
-
-        $this->assertEquals(0, Post::where('featured', true)->count());
     }
 
     public function test_can_access_contact()

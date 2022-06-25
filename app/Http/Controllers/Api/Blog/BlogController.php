@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Folder;
@@ -11,15 +11,6 @@ use App\Models\ApiStatus;
 
 class BlogController extends Controller
 {
-    public function csrf()
-    {
-        return [
-            'status' => ApiStatus::$STATUS_SUCCESS,
-            'message' => ApiStatus::$MESSAGE_CSRF_SUCCESS,
-            'csrf' => csrf_token(),
-        ];
-    }
-
     public function index()
     {
         $commonData = $this->common('index', 6);
@@ -38,7 +29,7 @@ class BlogController extends Controller
 
         $data = array_merge($data, $this->statusArray($status, $message));
 
-        return $data;
+        return response()->json($data);
     }
 
     public function about()
@@ -53,7 +44,7 @@ class BlogController extends Controller
         }
 
         $data = array_merge($commonData, $this->statusArray($status, $message));
-        return $data;
+        return response()->json($data);
     }
 
     public function archiveFolder()
@@ -80,8 +71,7 @@ class BlogController extends Controller
         }
 
         $data = array_merge($data, $this->statusArray($status, $message));
-
-        return $data;
+        return response()->json($data);
     }
 
     public function archiveList(string $year)
@@ -114,7 +104,7 @@ class BlogController extends Controller
         }
 
         $data = array_merge($data, $this->statusArray($status, $message));
-        return $data;
+        return response()->json($data);
     }
 
     public function posts(string $slug)
@@ -138,31 +128,7 @@ class BlogController extends Controller
             'latest' => $commonData['latest'],
             'posts' => $posts
         ], $this->statusArray($status, $message));
-
-        return $data;
-    }
-
-    public function postsFeatured(Request $request)
-    {
-        $request->validate([
-            'featured' => 'required|boolean'
-        ]);
-
-        $updateCount = Post::where('name', '!=', '')
-            ->update(['featured' => $request->input('featured')]);
-
-        if ($updateCount) {
-            return [
-                'status' => ApiStatus::$STATUS_SUCCESS,
-                'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_SUCCESS
-            ];
-        } else {
-            return [
-                'status' => ApiStatus::$STATUS_FAILED,
-                'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_FAILED
-            ];
-        }
-        
+        return response()->json($data);
     }
 
     public function contact()

@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\Blog\BlogController;
+use App\Http\Controllers\Api\Blog\FixController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,13 @@ Route::prefix('blog')->controller(BlogController::class)->name('api.blog')->grou
     Route::get('/archive-folder', 'archiveFolder')->name('archive');
     Route::get('/archive-list/{year}', 'archiveList')->name('archive.show');
     Route::get('/posts/{slug}', 'posts')->name('posts.show');
-    Route::post('/posts-featured', 'postsFeatured')->name('posts.featured');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/folders', 'folders')->name('folders');
-    Route::post('/folders-fix', 'foldersFix')->name('folders.fix');
+
+    Route::prefix('fix')->controller(FixController::class)->name('fix')->group(function() {
+        Route::post('/posts-featured', 'postsFeatured')->name('posts.featured');
+        Route::post('/folders', 'folders')->name('folders');
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
