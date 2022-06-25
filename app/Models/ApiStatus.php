@@ -14,8 +14,11 @@ class ApiStatus extends Model
     public static $MESSAGE_CSRF_SUCCESS = 'Showing CSRF token.';
     public static $MESSAGE_GET_DATA_SUCCESS = 'GET data SUCCESS.';
     public static $MESSAGE_GET_DATA_FAILED = 'GET data FAILED.';
-    public static $MESSAGE_POSTS_FEATURED_SUCCESS = 'Featured posts fixed.';
-    public static $MESSAGE_POSTS_FEATURED_FAILED = 'Featured posts fix FAILED.';
+    public static $MESSAGE_POSTS_FEATURED_SUCCESS = 'Fixing featured posts SUCCESS.';
+    public static $MESSAGE_POSTS_FEATURED_FAILED = 'Fixing featured posts fix FAILED.';
+
+    public static $MESSAGE_POSTS_YEAR_SUCCESS = "Fixing posts' years SUCCESS.";
+    public static $MESSAGE_POSTS_YEAR_FAILED = "Fixing posts' years FAILED.";
 
     public static function getStatuses()
     {
@@ -33,6 +36,8 @@ class ApiStatus extends Model
             self::$MESSAGE_GET_DATA_FAILED,
             self::$MESSAGE_POSTS_FEATURED_SUCCESS,
             self::$MESSAGE_POSTS_FEATURED_FAILED,
+            self::$MESSAGE_POSTS_YEAR_SUCCESS,
+            self::$MESSAGE_POSTS_YEAR_FAILED,
         ];
     }
 }

@@ -18,6 +18,6 @@ class ApiStatusTest extends TestCase
 
     public function test_messages()
     {
-        $this->assertCount(5, ApiStatus::getMessages());
+        $this->assertCount(7, ApiStatus::getMessages());
     }
 }
