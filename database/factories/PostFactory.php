@@ -34,7 +34,7 @@ class PostFactory extends Factory
             'featured' => $this->faker->boolean(),
             'meta_title' => $this->faker->sentence(5, true),
             'meta_description' => $this->faker->paragraph(3),
-            'published_at' => now()->format('Y-m-d'),
+            'published_at' => $this->faker->date('Y-m-d'),
         ];
     }
 }
