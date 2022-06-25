@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
+/** @group new */
 class PostTest extends TestCase
 {
     use RefreshDatabase;
@@ -27,20 +28,6 @@ class PostTest extends TestCase
         $post = Post::factory()->create();
 
         $this->assertEquals($post->user->name, $post->getUserName());
-    }
-
-    public function test_has_a_folder()
-    {
-        $post = Post::factory()->create();
-
-        $this->assertInstanceOf(Folder::class, $post->folder);
-    }
-
-    public function test_can_get_folder_name()
-    {
-        $post = Post::factory()->create();
-
-        $this->assertEquals($post->folder->name, $post->getFolderName());
     }
 
     public function test_can_get_created_at()
