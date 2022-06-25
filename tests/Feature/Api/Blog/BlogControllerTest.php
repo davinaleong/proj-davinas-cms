@@ -58,7 +58,6 @@ class BlogControllerTest extends TestCase
         Page::factory()->create([
             'name' => 'archive'
         ]);
-        Folder::factory()->count(4)->create();
         Post::factory()->create([
             'featured' => true
         ]);
@@ -81,12 +80,12 @@ class BlogControllerTest extends TestCase
             'name' => 'archive'
         ]);
 
-        $posts = Post::factory()->has(Folder::factory())->count(3)->create();
+        $posts = Post::factory()->count(3)->create();
         $post = $posts[0];
         $post->featured = true;
         $post->save();
 
-        $response = $this->get('/api/blog/archive-list/' . $post->getFolderName());
+        $response = $this->get('/api/blog/archive-list/' . $post->year);
         $response->assertOk();
         $response->assertJsonStructure([
             'status',
