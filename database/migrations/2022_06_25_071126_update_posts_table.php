@@ -15,7 +15,7 @@ class UpdatePostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->dropConstrainedForeignId('folder_id');
-            $table->string('year')->nullable()->after('featured');
+            $table->string('year', 4)->nullable()->after('featured');
         });
     }
 
