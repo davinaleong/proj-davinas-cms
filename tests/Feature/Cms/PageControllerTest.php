@@ -52,7 +52,6 @@ class PageControllerTest extends TestCase
             ->assertRedirect('/login');
     }
 
-    /** @group modified */
     public function test_user_can_store_a_page()
     {
         $user = User::factory()->create();
