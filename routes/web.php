@@ -22,6 +22,12 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
+if (env('APP_ENV') == 'local') {
+Route::get('/csrf', function () {
+    return csrf_token();
+});
+}
+
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
 

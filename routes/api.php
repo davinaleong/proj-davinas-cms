@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\Blog\BlogController;
+use App\Http\Controllers\Api\Blog\FixController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('blog')->controller(BlogController::class)->group(function () {
-    Route::get('/', 'index')->name('api.blog.index');
-    Route::get('/about', 'about')->name('api.blog.about');
-    Route::get('/archive-folder', 'archiveFolder')->name('api.blog.archive');
-    Route::get('/archive-list/{year}', 'archiveList')->name('api.blog.archive.show');
-    Route::get(
-        '/posts/{slug}',
-        'posts'
-    )->name('api.blog.posts.show');
-    Route::get('/contact', 'contact')->name('api.blog.contact');
+Route::prefix('blog')->controller(BlogController::class)->name('api.blog')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/csrf', 'csrf')->name('csrf');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/archive-folder', 'archiveFolder')->name('archive');
+    Route::get('/archive-list/{year}', 'archiveList')->name('archive.show');
+    Route::get('/posts/{slug}', 'posts')->name('posts.show');
+    Route::get('/contact', 'contact')->name('contact');
+
+    Route::prefix('fix')->controller(FixController::class)->name('fix')->group(function() {
+        Route::post('/posts-featured', 'postsFeatured')->name('posts.featured');
+        Route::post('/folders', 'folders')->name('folders');
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

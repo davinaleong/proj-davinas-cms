@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature\Api\Blog;
 
 use App\Models\Folder;
 use App\Models\Page;
@@ -26,6 +26,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/');
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'page',
             'featured',
             'latest'
@@ -44,6 +46,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/about/');
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'page',
             'latest'
         ]);
@@ -62,6 +66,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/archive-folder');
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'page',
             'featured',
             'latest',
@@ -83,6 +89,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/archive-list/' . $post->getFolderName());
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'page',
             'featured',
             'folders',
@@ -98,6 +106,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/posts/' . $post->slug);
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'latest',
             'posts'
         ]);
@@ -115,6 +125,8 @@ class BlogControllerTest extends TestCase
         $response = $this->get('/api/blog/contact/');
         $response->assertOk();
         $response->assertJsonStructure([
+            'status',
+            'message',
             'page',
             'latest'
         ]);
