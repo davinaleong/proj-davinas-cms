@@ -7,48 +7,87 @@ use App\Models\Folder;
 use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\ApiStatus;
 
 class BlogController extends Controller
 {
+    public function csrf()
+    {
+        return [
+            'status' => ApiStatus::$STATUS_SUCCESS,
+            'message' => ApiStatus::$MESSAGE_CSRF_SUCCESS,
+            'csrf' => csrf_token(),
+        ];
+    }
+
     public function index()
     {
-        $common_data = $this->common('Index', 6);
-        $featured_post = Post::where('featured', true)->first();
+        $commonData = $this->common('index', 6);
+        $featuredPost = Post::where('featured', true)->first();
 
-        $data = ['featured' => $featured_post];
-        $data = array_merge($data, $common_data);
+        $data = ['featured' => $featuredPost];
+        $data = array_merge($data, $commonData);
+
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData) && filled($featuredPost)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge($data, $this->statusArray($status, $message));
 
         return $data;
     }
 
     public function about()
     {
-        return $this->common('About', 1);
+        $commonData = $this->common('about', 1);
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge($commonData, $this->statusArray($status, $message));
+        return $data;
     }
 
     public function archiveFolder()
     {
-        $common_data = $this->common('archive', 1);
-
-        $featured_post = Post::where('featured', true)
+        $commonData = $this->common('archive', 1);
+        $featuredPost = Post::where('featured', true)
             ->first();
         $folders = Folder::whereRaw('LENGTH(`name`) <= 4')->orderByDesc('name')
             ->get();
 
         $data = [
-            'featured' => $featured_post,
+            'featured' => $featuredPost,
             'folders' => $folders
         ];
 
-        $data = array_merge($data, $common_data);
+        $data = array_merge($data, $commonData);
+
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData) && filled($featuredPost) && filled($folders)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge($data, $this->statusArray($status, $message));
+
         return $data;
     }
 
     public function archiveList(string $year)
     {
-        $common_data = $this->common('archive', 1);
-
-        $featured_post = Post::where('featured', true)
+        $commonData = $this->common('archive', 1);
+        $featuredPost = Post::where('featured', true)
             ->first();
         $folders = Folder::whereRaw("LOWER(name) LIKE LOWER('%$year%')")
             ->take(1)
@@ -60,45 +99,105 @@ class BlogController extends Controller
         }
 
         $data = [
-            'featured' => $featured_post,
+            'featured' => $featuredPost,
             'folders' => $folders,
             'posts' => $posts
         ];
-        $data = array_merge($data, $common_data);
+        $data = array_merge($data, $commonData);
 
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData) && filled($featuredPost) && filled($folders) && filled($posts)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge($data, $this->statusArray($status, $message));
         return $data;
     }
 
     public function posts(string $slug)
     {
-        $common_data = $this->common('post', 1);
+        $commonData = $this->common('post', 1);
         $posts = [];
 
         if ($slug) {
             $posts = Post::where('slug', $slug)->take(1)->get();
         }
 
-        return [
-            'latest' => $common_data['latest'],
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData['latest']) && filled($posts)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge([
+            'latest' => $commonData['latest'],
             'posts' => $posts
-        ];
+        ], $this->statusArray($status, $message));
+
+        return $data;
+    }
+
+    public function postsFeatured(Request $request)
+    {
+        $request->validate([
+            'featured' => 'required|boolean'
+        ]);
+
+        $updateCount = Post::where('name', '!=', '')
+            ->update(['featured' => $request->input('featured')]);
+
+        if ($updateCount) {
+            return [
+                'status' => ApiStatus::$STATUS_SUCCESS,
+                'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_SUCCESS
+            ];
+        } else {
+            return [
+                'status' => ApiStatus::$STATUS_FAILED,
+                'message' => ApiStatus::$MESSAGE_POSTS_FEATURED_FAILED
+            ];
+        }
+        
     }
 
     public function contact()
     {
-        return $this->common('contact', 1);
+        $commonData = $this->common('contact', 1);
+        $status = ApiStatus::$STATUS_FAILED;
+        $message = ApiStatus::$MESSAGE_GET_DATA_FAILED;
+
+        if (filled($commonData)) {
+            $status = ApiStatus::$STATUS_SUCCESS;
+            $message = ApiStatus::$MESSAGE_GET_DATA_SUCCESS;
+        }
+
+        $data = array_merge($commonData, $this->statusArray($status, $message));
+        return $data;
     }
 
-    private function common($page_name, $latest_count)
+    private function common($pageName, $latestCount)
     {
-        $page_data = Page::whereRaw("LOWER(name) LIKE LOWER('%$page_name%')")->first();
-        $latest_posts = Post::orderByDesc('published_at')
-            ->take($latest_count)
+        $pageData = Page::whereRaw("LOWER(name) LIKE LOWER('%$pageName%')")->first();
+        $latestPosts = Post::orderByDesc('published_at')
+            ->take($latestCount)
             ->get();
 
         return [
-            'page' => $page_data,
-            'latest' => $latest_posts
+            'page' => $pageData,
+            'latest' => $latestPosts
+        ];
+    }
+
+    private function statusArray($status, $message)
+    {
+        return [
+            'status' => $status,
+            'message' => $message,
         ];
     }
 }

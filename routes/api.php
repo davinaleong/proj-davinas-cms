@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('blog')->controller(BlogController::class)->name('api.blog')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/csrf', 'csrf')->name('csrf');
     Route::get('/about', 'about')->name('about');
     Route::get('/archive-folder', 'archiveFolder')->name('archive');
     Route::get('/archive-list/{year}', 'archiveList')->name('archive.show');
