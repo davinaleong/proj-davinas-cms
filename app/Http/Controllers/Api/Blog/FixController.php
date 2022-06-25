@@ -37,10 +37,10 @@ class FixController extends Controller
     {
         $sql = "YEAR(`published_at`)";
         if (env('DB_CONNECTION') == 'pgsql') {
-            $sql = "EXTRACT(YEAR FROM TIMESTAMP, published_at)";
+            $sql = "date_part('year', published_at)";
         }
         
-        DB::statement("UPDATE `posts` SET `year` = $sql WHERE `user_id` = 1");
+        DB::statement("UPDATE posts SET year = $sql WHERE user_id = 1");
 
         $data = [
             'status' => ApiStatus::$STATUS_SUCCESS,
