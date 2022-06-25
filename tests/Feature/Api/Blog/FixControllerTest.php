@@ -6,6 +6,8 @@ use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Support\Facades\DB;
+use App\Models\Folder;
 
 /** @group new */
 class FixControllerTest extends TestCase
@@ -33,5 +35,19 @@ class FixControllerTest extends TestCase
     public function test_can_access_fix_folders()
     {
         Post::factory()->count(50)->create();
+        $result = DB::table('posts')
+            ->select(DB::raw('YEAR(`published_at`) AS `year`'), DB::raw('COUNT(*) AS `post_count`'))
+            ->groupBy(DB::raw('YEAR(`published_at`)'))
+            ->orderByDesc(DB::raw('YEAR(`published_at`)'))
+            ->get();
+        
+        $response = $this->post('api/blog/fix/folders');
+        $response->assertOk();
+        $response->assertJson([
+            'status' => 'SUCCESS',
+            'message' => 'Folders fixed.'
+        ]);
+
+        $this->assertEquals(count($result), Folder::count());
     }
 }

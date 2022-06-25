@@ -22,9 +22,11 @@ class PostFactory extends Factory
             $text .= '<p>' . $this->faker->paragraph(5, true) . '</p>';
         }
 
+        $publishedAt = $this->faker->date('Y-m-d');
+        $year = date('Y', strtotime($publishedAt));
+
         return [
             'user_id' => \App\Models\User::factory(),
-            'folder_id' => \App\Models\Folder::factory(),
             'name' => $name,
             'slug' => Post::generateSlug($name),
             'title' => $this->faker->sentence(10, true),
@@ -34,7 +36,8 @@ class PostFactory extends Factory
             'featured' => $this->faker->boolean(),
             'meta_title' => $this->faker->sentence(5, true),
             'meta_description' => $this->faker->paragraph(3),
-            'published_at' => $this->faker->date('Y-m-d'),
+            'published_at' => $publishedAt,
+            'year' => $year
         ];
     }
 }
