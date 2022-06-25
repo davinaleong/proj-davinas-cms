@@ -29,4 +29,9 @@ class FixControllerTest extends TestCase
 
         $this->assertEquals(0, Post::where('featured', true)->count());
     }
+
+    public function test_can_access_fix_folders()
+    {
+        Post::factory()->count(50)->create();
+    }
 }

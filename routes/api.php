@@ -24,7 +24,6 @@ Route::prefix('blog')->controller(BlogController::class)->name('api.blog')->grou
     Route::get('/archive-list/{year}', 'archiveList')->name('archive.show');
     Route::get('/posts/{slug}', 'posts')->name('posts.show');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/folders', 'folders')->name('folders');
 
     Route::prefix('fix')->controller(FixController::class)->name('fix')->group(function() {
         Route::post('/posts-featured', 'postsFeatured')->name('posts.featured');
