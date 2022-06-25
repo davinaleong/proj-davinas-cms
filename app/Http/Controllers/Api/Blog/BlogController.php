@@ -52,7 +52,7 @@ class BlogController extends Controller
         $commonData = $this->common('archive', 1);
         $featuredPost = Post::where('featured', true)
             ->first();
-        $folders = Folder::whereRaw('length(`name`) <= 4')->orderByDesc('name')
+        $folders = Folder::whereRaw('length(name) <= 4')->orderByDesc('name')
             ->get();
 
         $data = [
