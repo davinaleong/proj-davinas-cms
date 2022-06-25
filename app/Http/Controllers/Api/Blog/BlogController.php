@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\ApiStatus;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -51,8 +52,12 @@ class BlogController extends Controller
     {
         $commonData = $this->common('archive', 1);
         $featuredPost = Post::where('featured', true)
+            ->orderByDesc('published_at')
             ->first();
-        $folders = Folder::whereRaw('length(name) <= 4')->orderByDesc('name')
+        $folders = DB::table('posts')
+            ->select('year')
+            ->groupBy('year')
+            ->orderByDesc('year')
             ->get();
 
         $data = [
@@ -79,14 +84,14 @@ class BlogController extends Controller
         $commonData = $this->common('archive', 1);
         $featuredPost = Post::where('featured', true)
             ->first();
-        $folders = Folder::whereRaw("LOWER(name) LIKE LOWER('%$year%')")
-            ->take(1)
+        $folders = DB::table('posts')
+            ->select('year')
+            ->where('year', $year)
+            ->groupBy('year')
+            ->orderByDesc('year')
             ->get();
-        $posts = [];
-        if ($folders->count() > 0) {
-            $posts = Post::where('folder_id', $folders[0]->id)
-                ->paginate(20);
-        }
+        $posts = Post::where('year', $year)
+            ->paginate(20);
 
         $data = [
             'featured' => $featuredPost,

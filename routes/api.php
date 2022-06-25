@@ -27,7 +27,7 @@ Route::prefix('blog')->controller(BlogController::class)->name('api.blog')->grou
 
     Route::prefix('fix')->controller(FixController::class)->name('fix')->group(function() {
         Route::post('/posts-featured', 'postsFeatured')->name('posts.featured');
-        Route::post('/folders', 'folders')->name('folders');
+        Route::post('/posts-year', 'postsYear')->name('posts.year');
     });
 });
 

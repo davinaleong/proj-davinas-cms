@@ -14,11 +14,6 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('posts.index', [
@@ -27,11 +22,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('posts.create', [
@@ -39,12 +29,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -65,16 +49,8 @@ class PostController extends Controller
 
         $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'))->format(Setting::getYearFormat());
 
-        $folder = Folder::where('name', $year)->first();
-        if (!$folder) {
-            $folder = Folder::create([
-                'name' => $year
-            ]);
-        }
-
         $post = Post::create([
             'user_id' => Auth::id(),
-            'folder_id' => $folder->id,
             'name' => $name,
             'slug' => Post::generateSlug($name),
             'title' => $request->input('title'),
@@ -82,6 +58,7 @@ class PostController extends Controller
             'summary' => Post::generateSummary($text),
             'text' => $text,
             'featured' => $featured,
+            'year' => $year,
             'meta_title' => $request->input('meta_title'),
             'meta_description' => $request->input('meta_description'),
             'published_at' => $request->input('published_at'),
@@ -102,12 +79,6 @@ class PostController extends Controller
             ->with('message', 'Post created.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         return view('posts.show', [
@@ -115,12 +86,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         return view('posts.edit', [
@@ -128,13 +93,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $request->validate([
@@ -155,15 +113,7 @@ class PostController extends Controller
 
         $year = Carbon::createFromFormat(Setting::getDbDateFormat(), $request->input('published_at'))->format(Setting::getYearFormat());
 
-        $folder = Folder::where('name', $year)->first();
-        if (!$folder) {
-            $folder = Folder::create([
-                'name' => $year
-            ]);
-        }
-
         $post->user_id = Auth::id();
-        $post->folder_id = $folder->id;
         $post->name = $name;
         $post->slug = Post::generateSlug($name);
         $post->title = $request->input('title');
@@ -171,6 +121,7 @@ class PostController extends Controller
         $post->summary = Post::generateSummary($text);
         $post->text = $text;
         $post->featured = $featured;
+        $post->year = $year;
         $post->meta_title = $request->input('meta_title');
         $post->meta_description = $request->input('meta_description');
         $post->published_at = $request->input('published_at');
@@ -191,12 +142,6 @@ class PostController extends Controller
             ->with('message', 'Post modified.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Post $post)
     {
         $post_name = $post->name;
